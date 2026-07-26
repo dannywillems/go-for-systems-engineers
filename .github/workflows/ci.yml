@@ -73,8 +73,8 @@ jobs:
       - run: make lint-ocaml OPAM="opam exec --"
 
   swift:
-    # Swift ships with the macOS runner image.
-    runs-on: macos-14
+    # macos-15 ships Swift 6 (macos-14 has Swift 5.10, too old for our packages).
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - run: swift --version
@@ -104,7 +104,8 @@ jobs:
   # -check; but `make docs` regenerates everything, so drift there is caught by
   # git diff).
   docs-fresh:
-    runs-on: macos-14
+    # macos-15 for Swift 6; needs all five toolchains to regenerate every block.
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -119,7 +120,7 @@ jobs:
       - run: opam install dune --yes
       - name: Install Kotlin + ktlint
         run: brew install kotlin ktlint
-      - name: Regenerate docs and fail on drift
+      - name: Check portable captured blocks are fresh
         run: bash scripts/ci/docs-fresh.sh
 
   generate-fresh:

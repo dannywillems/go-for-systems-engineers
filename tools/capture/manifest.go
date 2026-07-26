@@ -10,8 +10,8 @@ import (
 // manifest is a module-local capture.json declaring the command / source /
 // file behind each generated block name.
 type manifest struct {
-	path     string // absolute path to capture.json
-	dir      string // module directory (dir of capture.json)
+	path     string                 // absolute path to capture.json
+	dir      string                 // module directory (dir of capture.json)
 	Outputs  map[string]outputSpec  `json:"outputs"`
 	Snippets map[string]snippetSpec `json:"snippets"`
 	Files    map[string]fileSpec    `json:"files"`
@@ -41,8 +41,8 @@ type fileSpec struct {
 	Portable *bool  `json:"portable"` // default true
 }
 
-func (s outputSpec) portable() bool  { return s.Portable == nil || *s.Portable }
-func (s fileSpec) portable() bool    { return s.Portable == nil || *s.Portable }
+func (s outputSpec) portable() bool { return s.Portable == nil || *s.Portable }
+func (s fileSpec) portable() bool   { return s.Portable == nil || *s.Portable }
 
 type manifestCache struct {
 	byDir map[string]*manifest

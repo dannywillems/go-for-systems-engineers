@@ -8,5 +8,8 @@ count="${1:-6}"
 while IFS= read -r bench; do
 	d="$(dirname "$bench")"
 	echo "== $d"
-	(cd "$d" && go test -run '^$' -bench . -benchmem -count="$count" || true)
+	# Informational only; ignore a failing benchmark rather than stop the sweep.
+	if ! (cd "$d" && go test -run '^$' -bench . -benchmem -count="$count"); then
+		echo "  (benchmark failed; continuing)"
+	fi
 done < <(find modules -name bench.txt)

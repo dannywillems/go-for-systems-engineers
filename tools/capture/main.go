@@ -6,13 +6,13 @@
 //
 // A markdown file may contain three kinds of generated block:
 //
-//	<!-- BEGIN:output NAME -->   ... <!-- END:output NAME -->
-//	<!-- BEGIN:snippet NAME -->  ... <!-- END:snippet NAME -->
-//	<!-- BEGIN:file NAME -->     ... <!-- END:file NAME -->
+//		<!-- BEGIN:output NAME -->   ... <!-- END:output NAME -->
+//		<!-- BEGIN:snippet NAME -->  ... <!-- END:snippet NAME -->
+//		<!-- BEGIN:file NAME -->     ... <!-- END:file NAME -->
 //
-//   - output  runs a command and injects its stdout (or combined output).
-//   - snippet extracts a region of a real source file (never hand-copied code).
-//   - file    injects the full contents of a committed file (e.g. bench results).
+//	  - output  runs a command and injects its stdout (or combined output).
+//	  - snippet extracts a region of a real source file (never hand-copied code).
+//	  - file    injects the full contents of a committed file (e.g. bench results).
 //
 // The command / source / file behind each NAME is declared in the nearest
 // ancestor capture.json. Run with -check to verify freshness without writing

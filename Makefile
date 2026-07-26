@@ -160,9 +160,9 @@ lint: lint-go lint-rust lint-ocaml lint-swift lint-kotlin lint-shell ## Lint all
 .PHONY: lint-go
 lint-go: ## gofmt check, go vet, staticcheck, golangci-lint
 	@set -e; test -z "$$(gofmt -l $$(find $(SCOPE) -name '*.go' \
-		-not -path '*/_build/*'))" || \
+		-not -path '*/_build/*' $(REJECT)))" || \
 		{ echo "gofmt: files need formatting"; \
-		  gofmt -l $$(find $(SCOPE) -name '*.go'); exit 1; }
+		  gofmt -l $$(find $(SCOPE) -name '*.go' $(REJECT)); exit 1; }
 	@set -e; for d in $(GO_DIRS); do echo "== vet/staticcheck $$d"; \
 		(cd $$d && go vet ./... && staticcheck ./... && \
 		 golangci-lint run ./... --config $(CURDIR)/.golangci.yml); done
@@ -199,7 +199,7 @@ lint-shell: ## shellcheck the harness + CI scripts
 
 .PHONY: format
 format: ## Format all code in place
-	@gofmt -w $$(find $(SCOPE) -name '*.go' -not -path '*/_build/*')
+	@gofmt -w $$(find $(SCOPE) -name '*.go' -not -path '*/_build/*' $(REJECT))
 	@for d in $(RUST_DIRS); do (cd $$d && cargo fmt); done
 	@for d in $(OCAML_DIRS); do (cd $$d && $(OPAM) dune build @fmt \
 		--auto-promote 2>/dev/null || true); done
