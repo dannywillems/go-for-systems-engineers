@@ -17,6 +17,9 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # Weekly link-liveness check (Mondays 06:00 UTC).
+    - cron: "0 6 * * 1"
 
 permissions:
   contents: read
@@ -28,6 +31,17 @@ jobs:
       - uses: actions/checkout@v4
       - name: shellcheck all scripts
         run: shellcheck scripts/*.sh scripts/ci/*.sh
+
+  # Link liveness is checked weekly and on demand, NOT on every push: external
+  # links are flaky and some hosts block CI bots, so a transient failure must
+  # not block a code change. Fails only on 000/404/410 (see the script).
+  links:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: check every markdown link is live
+        run: bash scripts/check-links.sh
 
   go:
     runs-on: ubuntu-latest

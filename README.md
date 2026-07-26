@@ -6,6 +6,29 @@ world". Each module isolates a place where Go's semantics, guarantees, or
 runtime cost diverge from those languages, demonstrates it with compiled code,
 measures it where a number is warranted, and states the theory precisely.
 
+## Status and provenance
+
+This is a living flush of notes, updated over time, not a finished course.
+Modules are added, corrected, and expanded as the work continues; expect gaps
+and revisions.
+
+**The code is the truth.** The prose explains it, but the compiled, tested,
+measured programs are what is authoritative here; when prose and code disagree,
+the code wins, and the falsifiability harness below is what keeps the prose
+honest against it.
+
+The work is AI-assisted. The author, Danny Willems, focuses on the actual
+gathering of knowledge — the semantics, the measurements, and their meaning —
+which is the main use of AI here: everything repetitive and of low value to the
+human learning process is delegated to the AI for productivity. Concretely, the
+AI generates and sketches the repository under the author's direction, to the
+shape the author wants, and automates the cumbersome, low-insight scaffolding:
+the infrastructure and CI, the multi-language build, and the tooling setup
+(formatters, linters, compilers, benchmark harness). The claims are then
+verified over time by the author, mechanically via the harness rather than on
+trust. Treat this as a learning tool, cross-checked against the linked official
+sources, not as an authority.
+
 ## The one rule: falsifiability
 
 Every empirical claim in a README is produced by a program in this repo and

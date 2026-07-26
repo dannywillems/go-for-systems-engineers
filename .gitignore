@@ -31,3 +31,6 @@ Thumbs.db
 # Environment
 .env
 .env.local
+
+# capture binary if built in-place (bin/capture is the real output)
+/tools/capture/capture

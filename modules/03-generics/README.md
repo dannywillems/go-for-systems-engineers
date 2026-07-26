@@ -157,13 +157,27 @@ witness tables, Kotlin/JVM erasure + `reified`), and [`exercises/`](exercises).
 
 ## References
 
-Official sources first.
+Official sources first, grouped by language.
 
-- Go spec, Type parameters and constraints: https://go.dev/ref/spec#Type_parameter_declarations
+### Go
+
+- Go spec, Type parameter declarations: https://go.dev/ref/spec#Type_parameter_declarations
 - The Go Blog, "An Introduction To Generics": https://go.dev/blog/intro-generics
-- Go generics implementation (GCShape, dictionaries) design: https://go.googlesource.com/proposal/+/refs/heads/master/design/generics-implementation-dictionaries-go1.18.md
+- Generics implementation (GCShape, dictionaries) design: https://go.googlesource.com/proposal/+/refs/heads/master/design/generics-implementation-dictionaries-go1.18.md
 - PlanetScale, "Generics can make your Go code slower" (dictionaries measured): https://planetscale.com/blog/generics-can-make-your-go-code-slower
+
+### Rust
+
 - The Rust Reference, generic parameters / monomorphization: https://doc.rust-lang.org/reference/items/generics.html
+
+### OCaml
+
 - OCaml Manual, Functors: https://ocaml.org/manual/5.4/moduleexamples.html#s:functors
+
+### Swift
+
 - Swift generics (The Swift Programming Language): https://docs.swift.org/swift-book/documentation/the-swift-programming-language/generics/
+
+### Kotlin
+
 - Kotlin, Generics and type erasure: https://kotlinlang.org/docs/generics.html

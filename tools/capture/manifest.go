@@ -10,23 +10,23 @@ import (
 // manifest is a module-local capture.json declaring the command / source /
 // file behind each generated block name.
 type manifest struct {
-	path     string                 // absolute path to capture.json
-	dir      string                 // module directory (dir of capture.json)
 	Outputs  map[string]outputSpec  `json:"outputs"`
 	Snippets map[string]snippetSpec `json:"snippets"`
 	Files    map[string]fileSpec    `json:"files"`
+	path     string
+	dir      string
 }
 
 type outputSpec struct {
-	Dir        string   `json:"dir"`        // working dir relative to module, default "."
-	Cmd        []string `json:"cmd"`        // argv, run without a shell
-	Env        []string `json:"env"`        // extra KEY=VALUE appended to os.Environ
-	Combined   bool     `json:"combined"`   // merge stderr into stdout
-	AllowError bool     `json:"allowError"` // do not fail if the command exits non-zero
-	ShowCmd    bool     `json:"showCmd"`    // prefix output with a "$ cmd" line inside the fence
-	Lang       string   `json:"lang"`       // fence language, default "text"
-	Normalize  []string `json:"normalize"`  // named scrubbers: path, addr, goid, gover, blank
-	Portable   *bool    `json:"portable"`   // default true; false => skipped by -check
+	Portable   *bool    `json:"portable"`
+	Dir        string   `json:"dir"`
+	Lang       string   `json:"lang"`
+	Cmd        []string `json:"cmd"`
+	Env        []string `json:"env"`
+	Normalize  []string `json:"normalize"`
+	Combined   bool     `json:"combined"`
+	AllowError bool     `json:"allowError"`
+	ShowCmd    bool     `json:"showCmd"`
 }
 
 type snippetSpec struct {
@@ -36,9 +36,9 @@ type snippetSpec struct {
 }
 
 type fileSpec struct {
+	Portable *bool  `json:"portable"`
 	File     string `json:"file"`
 	Lang     string `json:"lang"`
-	Portable *bool  `json:"portable"` // default true
 }
 
 func (s outputSpec) portable() bool { return s.Portable == nil || *s.Portable }

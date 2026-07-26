@@ -178,7 +178,9 @@ five memory models (Go happens-before, Rust `Send`/`Sync`, OCaml 5 domains +
 
 ## References
 
-Official sources first.
+Official sources first, grouped by language.
+
+### Go
 
 - Go Memory Model (normative): https://go.dev/ref/mem
 - Data Race Detector (official guide): https://go.dev/doc/articles/race_detector
@@ -188,11 +190,23 @@ Official sources first.
 - `golang.org/x/sync/errgroup`: https://pkg.go.dev/golang.org/x/sync/errgroup
 - `context` package docs: https://pkg.go.dev/context
 - goleak (Uber): https://github.com/uber-go/goleak
+
+### Rust
+
 - Rust `Send`/`Sync` (Reference): https://doc.rust-lang.org/reference/special-types-and-traits.html#send
 - The Rustonomicon, Send and Sync: https://doc.rust-lang.org/nomicon/send-and-sync.html
+
+### OCaml
+
 - OCaml Manual, Parallelism (domains): https://ocaml.org/manual/5.4/parallelism.html
 - OCaml `Atomic` module: https://ocaml.org/manual/5.4/api/Atomic.html
+
+### Swift
+
 - Swift `Sendable` protocol: https://developer.apple.com/documentation/swift/sendable
 - Swift concurrency (The Swift Programming Language): https://docs.swift.org/swift-book/documentation/the-swift-programming-language/concurrency/
+
+### Kotlin (JVM)
+
 - Java Language Specification, ch. 17 (Java Memory Model): https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html
 - `java.util.concurrent.atomic` (used from Kotlin): https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/atomic/package-summary.html

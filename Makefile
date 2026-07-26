@@ -228,6 +228,10 @@ docs: tools ## Regenerate all captured README blocks
 docs-check: tools ## Fail if any portable captured block is stale (docs-fresh gate)
 	@$(OPAM) $(CAPTURE) -root $(SCOPE) -check
 
+.PHONY: check-links
+check-links: ## Check every markdown link is live (needs network; flaky, run manually)
+	@bash scripts/check-links.sh
+
 # --- Bench (manual; shared runners are too noisy for CI) ----------------------
 .PHONY: bench
 bench: ## How to run benchmarks (see each module README for exact invocations)

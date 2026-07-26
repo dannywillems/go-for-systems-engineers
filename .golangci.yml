@@ -25,3 +25,11 @@ linters:
         linters:
           - errcheck
           - nilerr
+      # tools/capture is a trusted build-time tool: it reads repo files by path,
+      # writes world-readable READMEs (0644), and runs commands declared in the
+      # repo's own capture.json. gosec's file-inclusion (G304), write-perms
+      # (G306), and subprocess (G204) findings flag exactly that intended
+      # behavior, not untrusted-input handling. Documented, reviewed exclusion.
+      - path: tools/capture/
+        linters:
+          - gosec

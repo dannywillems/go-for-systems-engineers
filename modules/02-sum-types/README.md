@@ -118,14 +118,28 @@ none of which the compiler forces you to check. See
 
 ## References
 
-Official sources first.
+Official sources first, grouped by language.
+
+### Go
 
 - Go spec, Type switches: https://go.dev/ref/spec#Type_switches
 - `go/analysis` framework: https://pkg.go.dev/golang.org/x/tools/go/analysis
 - `analysistest`: https://pkg.go.dev/golang.org/x/tools/go/analysis/analysistest
 - Prior art: BurntSushi/go-sumtype (the `//sumtype:decl` convention): https://github.com/BurntSushi/go-sumtype
+
+### Rust
+
 - The Rust Book, Enums and pattern matching: https://doc.rust-lang.org/book/ch06-00-enums.html
 - Rust Reference, `match` expressions (exhaustiveness): https://doc.rust-lang.org/reference/expressions/match-expr.html
-- OCaml Manual, variants and warning 8: https://ocaml.org/manual/5.4/coreexamples.html
+
+### OCaml
+
+- OCaml Manual, variants and warning 8 (partial-match): https://ocaml.org/manual/5.4/coreexamples.html
+
+### Swift
+
 - Swift, Enumerations: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/enumerations/
+
+### Kotlin
+
 - Kotlin, Sealed classes and `when`: https://kotlinlang.org/docs/sealed-classes.html
