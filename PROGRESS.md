@@ -27,7 +27,7 @@ Apple M4 Pro (14 cores), macOS arm64.
 | 07  | Scheduler                     | done    | GMP + async preemption (100k goroutines), p50/p99 latency vs worker count, GOMAXPROCS/cgroup (Go 1.25 fix), 5-language CPU throughput (all within ~15%) |
 | 08  | API design & boundaries       | pending |                                                   |
 | 09  | Reflection & codegen          | pending |                                                   |
-| 10  | Observability & performance   | pending |                                                   |
+| 10  | Observability & performance   | done    | deterministic alloc COUNT as the falsifiable spine (AllocsPerRun: 63 vs 1); pprof (hotLoop 99.6%) + runtime/metrics + benchstat; in-process alloc counters in Go/Rust(global alloc)/OCaml(minor_words)/JVM(ThreadMXBean), Swift the exception (Instruments/os_signpost) |
 | 11  | Testing                       | pending |                                                   |
 | 12  | Capstone                      | done    | concurrent bounded cache (mutex+eviction+semaphore backpressure+ctx shutdown) in 5 langs; throughput+p50/p99/p999 bench + migration matrix (binary/LOC/cold-compile); actor trades throughput for a tight tail |
 | 13  | Unsafe                        | done    | unsafe.String/Slice zero-copy (1.6ns/0 allocs vs 11ns/80B), Offsetof layout, uintptr GC hazard; Rust/Miri, OCaml Obj.magic, Swift withUnsafeBytes, JVM FFM/ByteBuffer |

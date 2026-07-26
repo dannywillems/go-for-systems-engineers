@@ -1,0 +1,4 @@
+(library
+ (name observability)
+ (flags
+  (:standard -w +a-70 -warn-error +a)))

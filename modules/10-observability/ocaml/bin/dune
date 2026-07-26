@@ -1,0 +1,5 @@
+(executable
+ (name main)
+ (libraries observability unix)
+ (flags
+  (:standard -w +a-70 -warn-error +a)))

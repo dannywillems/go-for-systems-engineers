@@ -1,0 +1,22 @@
+{
+  "outputs": {
+    "go-allocs": {
+      "dir": "go",
+      "cmd": ["go", "run", "./cmd/allocs"],
+      "showCmd": true
+    }
+  },
+  "snippets": {
+    "go-builder": { "file": "go/perf.go", "region": "builder" },
+    "go-pprof": { "file": "go/profile.go", "region": "pprof" },
+    "go-metrics": { "file": "go/profile.go", "region": "metrics" },
+    "rust-counter": { "file": "rust/src/lib.rs", "region": "counter" },
+    "swift-signpost": {
+      "file": "swift/Sources/Observability/Observability.swift",
+      "region": "signpost"
+    }
+  },
+  "files": {
+    "measured": { "file": "measured.txt", "portable": false }
+  }
+}
