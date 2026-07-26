@@ -1,0 +1,42 @@
+{
+  "outputs": {
+    "go-demo":    { "dir": "go",    "cmd": ["go", "run", "./cmd/demo"], "showCmd": true },
+    "rust-demo":  { "dir": "rust",  "cmd": ["cargo", "run", "--quiet", "--bin", "demo"], "showCmd": true },
+    "ocaml-demo": { "dir": "ocaml", "cmd": ["dune", "exec", "bin/main.exe"], "showCmd": true },
+    "swift-demo": { "cmd": ["bash", "../../scripts/run-swift.sh", "swift"] },
+    "kotlin-demo": { "cmd": ["bash", "../../scripts/run-kotlin.sh", "kotlin"] },
+
+    "go-analyzer": {
+      "dir": "go",
+      "cmd": ["bash", "-c", "go run ./cmd/exhaustive ./examples/incomplete 2>&1 | sed 's#.*/examples/#examples/#'"],
+      "allowError": true, "portable": false
+    },
+    "rust-reject": {
+      "dir": "reject-rust",
+      "cmd": ["bash", "-c", "cargo build 2>&1 | grep -E 'E0004|not covered' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    },
+    "ocaml-reject": {
+      "dir": "reject-ocaml",
+      "cmd": ["bash", "-c", "dune build 2>&1 | grep -i 'not exhaustive' | head -1"],
+      "allowError": true, "portable": false
+    },
+    "swift-reject": {
+      "dir": "reject-swift",
+      "cmd": ["bash", "-c", "swiftc -typecheck reject.swift 2>&1 | grep -i 'must be exhaustive' | head -1"],
+      "allowError": true, "portable": false
+    },
+    "kotlin-reject": {
+      "dir": "reject-kotlin",
+      "cmd": ["bash", "-c", "kotlinc reject.kt -include-runtime -d /tmp/rk.jar 2>&1 | grep -i exhaustive | head -1"],
+      "allowError": true, "portable": false
+    }
+  },
+  "snippets": {
+    "go-variants":  { "file": "go/expr.go",              "region": "variants" },
+    "rust-enum":    { "file": "rust/src/lib.rs",         "region": "enum" },
+    "ocaml-variant": { "file": "ocaml/lib/expr.ml",      "region": "variant" },
+    "swift-enum":   { "file": "swift/Sources/Calc/Expr.swift", "region": "enum" },
+    "kotlin-sealed": { "file": "kotlin/lib/Expr.kt",     "region": "sealed" }
+  }
+}

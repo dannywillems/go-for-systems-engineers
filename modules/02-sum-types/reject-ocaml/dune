@@ -1,0 +1,6 @@
+; EXPECTED TO FAIL: warning 8 (partial match) promoted to an error. capture
+; builds this to inject the "not exhaustive" diagnostic.
+(executable
+ (name reject)
+ (flags
+  (:standard -w +8 -warn-error +8)))

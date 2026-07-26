@@ -1,0 +1,10 @@
+[package]
+name = "reject-nonexhaustive"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# EXPECTED TO FAIL: a non-exhaustive match. Excluded from `make build` by the
+# reject-* convention; capture builds it to inject the E0004 error.
+[lib]
+path = "src/lib.rs"

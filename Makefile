@@ -208,6 +208,12 @@ format: ## Format all code in place
 	@for d in $(KOTLIN_DIRS); do (cd $$d && ktlint -F \
 		"lib/**/*.kt" "app/**/*.kt" "test/**/*.kt" || true); done
 
+.PHONY: exhaustive
+exhaustive: ## Run Module 02's sum-type analyzer on the exhaustive packages
+	@d=modules/02-sum-types/go; \
+	if [ -d $$d ]; then echo "== exhaustive $$d"; \
+		(cd $$d && go run ./cmd/exhaustive .); fi
+
 .PHONY: vuln
 vuln: ## govulncheck every Go module (reachability-aware)
 	@set -e; for d in $(GO_DIRS); do echo "== govulncheck $$d"; \
