@@ -141,3 +141,19 @@ first-class and methods can be generic. See [`COMPARISON.md`](COMPARISON.md) for
 Go's own idiom — the sticky-error pattern (`bufio.Scanner`, an `errWriter`) — is
 the manual `bind`: accumulate the first error in a field and check once at the
 end, because the language will not thread it for you.
+
+## References
+
+Official sources first.
+
+- `io.Reader` contract (n>0 with EOF): https://pkg.go.dev/io#Reader
+- The Go Blog, "Working with Errors in Go 1.13" (`%w`, `Is`/`As`): https://go.dev/blog/go1.13-errors
+- `errors` package: https://pkg.go.dev/errors
+- The Go Blog, "An Introduction To Generics": https://go.dev/blog/intro-generics
+- Go spec, Method declarations (methods take no type parameters): https://go.dev/ref/spec#Method_declarations
+- errcheck: https://github.com/kisielk/errcheck
+- The Rust Book, Error handling (`Result`, `?`): https://doc.rust-lang.org/book/ch09-00-error-handling.html
+- thiserror: https://docs.rs/thiserror
+- OCaml Manual, Binding operators (`let*`): https://ocaml.org/manual/5.4/bindingops.html
+- Swift, Error handling and `Result`: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/errorhandling/ , https://developer.apple.com/documentation/swift/result
+- Kotlin, Exceptions and `Result`: https://kotlinlang.org/docs/exceptions.html

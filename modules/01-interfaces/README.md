@@ -124,3 +124,17 @@ same guarantee for methods promoted through struct embedding. See
 [`COMPARISON.md`](COMPARISON.md) for the five-language axis (nominal vs
 structural, static vs dynamic, existential representation) and
 [`exercises/`](exercises).
+
+## References
+
+Official sources first.
+
+- Go spec, Interface types: https://go.dev/ref/spec#Interface_types
+- Russ Cox, "Go Data Structures: Interfaces" (the itab layout): https://research.swtch.com/interfaces
+- The Go Blog, "The Laws of Reflection": https://go.dev/blog/laws-of-reflection
+- Rust Reference, trait objects (`dyn`): https://doc.rust-lang.org/reference/types/trait-object.html
+- Rust Reference, orphan / coherence rules: https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules
+- OCaml Manual, Objects: https://ocaml.org/manual/5.4/objectexamples.html
+- OCaml Manual, First-class modules: https://ocaml.org/manual/5.4/firstclassmodules.html
+- Swift, Protocols (existential `any` vs opaque `some`): https://docs.swift.org/swift-book/documentation/the-swift-programming-language/protocols/
+- Kotlin, Interfaces: https://kotlinlang.org/docs/interfaces.html

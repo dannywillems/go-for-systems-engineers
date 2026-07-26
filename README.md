@@ -123,3 +123,14 @@ Go's position relative to them is.
   would need Swift-on-Linux and is not wired.
 - Where a measurement cannot be made reliably (shared-runner timing, a
   non-reproducible behavior), the README says so rather than inventing a number.
+
+## References
+
+Every module ends with its own official-sources-first References section. The
+language homes:
+
+- Go: https://go.dev/doc/ (spec https://go.dev/ref/spec, memory model https://go.dev/ref/mem)
+- Rust: https://doc.rust-lang.org/ (the Reference, the Book, the Rustonomicon)
+- OCaml: https://ocaml.org/manual/
+- Swift: https://docs.swift.org/swift-book/ and https://www.swift.org/documentation/
+- Kotlin: https://kotlinlang.org/docs/home.html

@@ -115,3 +115,17 @@ Go has no `Option`; it uses `(T, bool)` comma-ok, a nil `*T`, or the zero value,
 none of which the compiler forces you to check. See
 [`COMPARISON.md`](COMPARISON.md) for the five definitions side by side and the
 `*T` / `Option<T>` / `T?` representation table, and [`exercises/`](exercises).
+
+## References
+
+Official sources first.
+
+- Go spec, Type switches: https://go.dev/ref/spec#Type_switches
+- `go/analysis` framework: https://pkg.go.dev/golang.org/x/tools/go/analysis
+- `analysistest`: https://pkg.go.dev/golang.org/x/tools/go/analysis/analysistest
+- Prior art: BurntSushi/go-sumtype (the `//sumtype:decl` convention): https://github.com/BurntSushi/go-sumtype
+- The Rust Book, Enums and pattern matching: https://doc.rust-lang.org/book/ch06-00-enums.html
+- Rust Reference, `match` expressions (exhaustiveness): https://doc.rust-lang.org/reference/expressions/match-expr.html
+- OCaml Manual, variants and warning 8: https://ocaml.org/manual/5.4/coreexamples.html
+- Swift, Enumerations: https://docs.swift.org/swift-book/documentation/the-swift-programming-language/enumerations/
+- Kotlin, Sealed classes and `when`: https://kotlinlang.org/docs/sealed-classes.html

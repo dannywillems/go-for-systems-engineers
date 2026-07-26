@@ -141,5 +141,20 @@ Sum-14   0.000 ± 0%
 this same harness for claims that actually matter.
 
 See [`COMPARISON.md`](COMPARISON.md) for the toolchain and static-analysis
-landscape across the three languages, and [`exercises/`](exercises) for the
+landscape across the five languages, and [`exercises/`](exercises) for the
 reader's tasks.
+
+## References
+
+Official sources first.
+
+- Go toolchain and `GOTOOLCHAIN`: https://go.dev/doc/toolchain
+- `testing` benchmarks (`testing.B`): https://pkg.go.dev/testing#hdr-Benchmarks
+- benchstat: https://pkg.go.dev/golang.org/x/perf/cmd/benchstat
+- staticcheck: https://staticcheck.dev/
+- golangci-lint: https://golangci-lint.run/
+- govulncheck: https://go.dev/blog/govulncheck
+- Rust docs / Clippy / rustfmt: https://doc.rust-lang.org/ , https://doc.rust-lang.org/clippy/ , https://github.com/rust-lang/rustfmt
+- OCaml, dune, ocamlformat: https://ocaml.org/docs , https://dune.readthedocs.io/ , https://github.com/ocaml-ppx/ocamlformat
+- Swift, swift-format: https://www.swift.org/documentation/ , https://github.com/swiftlang/swift-format
+- Kotlin, ktlint: https://kotlinlang.org/docs/home.html , https://pinterest.github.io/ktlint/
