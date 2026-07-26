@@ -1,0 +1,16 @@
+{
+  "outputs": {
+    "go-demo": { "dir": "go", "cmd": ["go", "run", "./cmd/demo"], "showCmd": true },
+    "go-catch": {
+      "dir": "reject-buggy",
+      "cmd": ["bash", "-c", "go test -run=FuzzNormalize ./... 2>&1 | grep -i 'invariant violated' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    }
+  },
+  "snippets": {
+    "go-normalize": { "file": "go/normalize.go",      "region": "normalize" },
+    "go-property":  { "file": "go/normalize_test.go", "region": "property" },
+    "go-fuzz":      { "file": "go/normalize_test.go", "region": "fuzz" },
+    "go-synctest":  { "file": "go/synctest_test.go",  "region": "synctest" }
+  }
+}
