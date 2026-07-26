@@ -1,0 +1,8 @@
+machine: Apple M4 Pro (14 cores), macOS arm64
+workload: marshal a 2-field struct to JSON, two ways producing the same
+bytes. ReflectMarshal = encoding/json (walks reflect.Type per call);
+ManualMarshal = a hand-written encoder. allocs/op is deterministic.
+
+# Go: reflection vs hand-written marshaler (go test -bench -benchmem)
+BenchmarkReflectMarshal-14    	12301630	        88.21 ns/op	      96 B/op	       3 allocs/op
+BenchmarkManualMarshal-14     	75106011	        14.78 ns/op	      24 B/op	       1 allocs/op

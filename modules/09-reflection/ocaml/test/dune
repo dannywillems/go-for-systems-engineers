@@ -1,0 +1,5 @@
+(test
+ (name test_codegen)
+ (libraries codegen)
+ (flags
+  (:standard -w +a-70 -warn-error +a)))
