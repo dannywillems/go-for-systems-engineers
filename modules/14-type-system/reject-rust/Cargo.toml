@@ -1,0 +1,7 @@
+[package]
+name = "reject-typestate"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# EXPECTED TO FAIL: calls open() on a Door<Open>, a state that has no open().

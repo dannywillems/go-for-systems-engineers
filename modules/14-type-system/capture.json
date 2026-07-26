@@ -1,0 +1,35 @@
+{
+  "outputs": {
+    "go-demo":    { "dir": "go",    "cmd": ["go", "run", "./cmd/demo"], "showCmd": true },
+    "rust-demo":  { "dir": "rust",  "cmd": ["cargo", "run", "--quiet", "--bin", "demo"], "showCmd": true },
+    "ocaml-demo": { "dir": "ocaml", "cmd": ["dune", "exec", "bin/main.exe"], "showCmd": true },
+    "swift-demo": { "cmd": ["bash", "../../scripts/run-swift.sh", "swift"] },
+    "kotlin-demo": { "cmd": ["bash", "../../scripts/run-kotlin.sh", "kotlin"] },
+
+    "go-reject": {
+      "dir": "reject-go",
+      "cmd": ["bash", "-c", "go build ./... 2>&1 | grep -i 'cannot use' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    },
+    "rust-reject": {
+      "dir": "reject-rust",
+      "cmd": ["bash", "-c", "cargo build 2>&1 | grep -E 'E0599|no method named' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    },
+    "swift-reject": {
+      "dir": "reject-swift",
+      "cmd": ["bash", "-c", "swiftc -typecheck reject.swift 2>&1 | grep -i 'be equivalent' | head -1"],
+      "allowError": true, "portable": false
+    },
+    "kotlin-reject": {
+      "dir": "reject-kotlin",
+      "cmd": ["bash", "-c", "kotlinc reject.kt -include-runtime -d /tmp/rk14.jar 2>&1 | grep -i \"in 'in' position\" | head -1"],
+      "allowError": true, "portable": false
+    }
+  },
+  "snippets": {
+    "go-phantom":     { "file": "go/phantom.go",       "region": "phantom" },
+    "rust-typestate": { "file": "rust/src/lib.rs",     "region": "typestate" },
+    "ocaml-gadt":     { "file": "ocaml/lib/ts.ml",     "region": "gadt" }
+  }
+}

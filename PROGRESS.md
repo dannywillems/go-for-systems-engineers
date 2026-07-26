@@ -31,7 +31,7 @@ Apple M4 Pro (14 cores), macOS arm64.
 | 11  | Testing                       | pending |                                                   |
 | 12  | Capstone                      | pending |                                                   |
 | 13  | Unsafe                        | pending |                                                   |
-| 14  | Type-system quirks            | pending |                                                   |
+| 14  | Type-system quirks            | done    | Go phantom type params, Rust typestate, OCaml GADT eval, Swift typestate, Kotlin variance; 4 compile-rejects; expressiveness matrix |
 
 ## Build order
 
