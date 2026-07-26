@@ -1,0 +1,18 @@
+{
+  "outputs": {
+    "go-demo": { "dir": "go", "cmd": ["go", "run", "./cmd/demo"], "showCmd": true },
+
+    "go-escape": {
+      "dir": "go",
+      "cmd": ["bash", "-c", "go build -gcflags=-m ./... 2>&1 | grep -E 'escape.go.*(escapes to heap|does not escape|moved to heap)' | head -6"],
+      "portable": false
+    }
+  },
+  "snippets": {
+    "go-padding": { "file": "go/layout.go", "region": "padding" },
+    "go-escape":  { "file": "go/escape.go", "region": "escape" }
+  },
+  "files": {
+    "measured": { "file": "measured.txt", "portable": false }
+  }
+}

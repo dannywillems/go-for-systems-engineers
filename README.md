@@ -6,6 +6,17 @@ world". Each module isolates a place where Go's semantics, guarantees, or
 runtime cost diverge from those languages, demonstrates it with compiled code,
 measures it where a number is warranted, and states the theory precisely.
 
+## Contents
+
+- [Status and provenance](#status-and-provenance)
+- [The one rule: falsifiability](#the-one-rule-falsifiability)
+- [Five languages](#five-languages)
+- [Usage](#usage)
+- [Curriculum](#curriculum)
+- [Theory stance](#theory-stance)
+- [Honest limits](#honest-limits)
+- [References](#references)
+
 ## Status and provenance
 
 This is a living flush of notes, updated over time, not a finished course.

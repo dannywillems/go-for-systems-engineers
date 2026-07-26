@@ -1,0 +1,12 @@
+[package]
+name = "mem"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "demo"
+path = "src/bin/demo.rs"
+
+[profile.release]
+opt-level = 3

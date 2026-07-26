@@ -22,7 +22,7 @@ Apple M4 Pro (14 cores), macOS arm64.
 | 02  | No sum types + analyzer       | done    | go/analysis exhaustiveness pass (+analysistest, CI), 4-language reject captures, Option/niche |
 | 03  | Generics / GCShape            | done    | GCShape objdump (pointer collapse to *uint8), stencil bench (generic≈concrete≪interface), HKT reject, honest Go-vs-Rust binary size, functors/witness/erasure |
 | 04  | Errors                        | done    | (T,error) product-not-sum (io.EOF), typed nil, Result monad laws + unusable, errcheck + generic-method rejects |
-| 05  | Memory, layout, allocations   | pending |                                                   |
+| 05  | Memory, layout, allocations   | done    | padding/fieldalignment, escape analysis (-m), slice aliasing, GOGC throughput-vs-RSS, 5-language alloc bench (OCaml minor GC beats Go; GCs beat malloc here) |
 | 06  | Memory model & data races     | done    | -race capture, dynamic-detector limits, goleak, errgroup; Rust Send/Sync + Swift 6 Sendable rejects; OCaml domains/Atomic; atomic-vs-mutex bench; References |
 | 07  | Scheduler                     | pending |                                                   |
 | 08  | API design & boundaries       | pending |                                                   |

@@ -1,0 +1,13 @@
+machine: Apple M4 Pro (14 cores), macOS arm64
+workload: 50,000,000 short-lived ~8-word heap objects, single run
+
+# Go: GOGC throughput vs RSS trade (same workload, two GOGC values)
+GOGC=100  alloc 50M: 489 ms  NumGC=891  HeapSys=7 MiB  (acc=1249999975000000)
+GOGC=800  alloc 50M: 411 ms  NumGC=102  HeapSys=35 MiB  (acc=1249999975000000)
+
+# Cross-language allocation time (optimized builds; see caveats)
+Go     alloc 50M: 499 ms  NumGC=892  HeapSys=7 MiB  (acc=1249999975000000)
+OCaml alloc 50M (minor GC): 432 ms (acc=1250000025000000)
+Rust alloc 50M (Box, no GC): 566 ms (acc=1249999975000000)
+Swift alloc 50M (class/ARC): 916 ms (acc=1249999975000000)
+Kotlin alloc 50M (JVM GC): 293 ms (acc=1249999975000000)
