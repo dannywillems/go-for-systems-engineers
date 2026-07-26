@@ -1,0 +1,26 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/dannywillems/go-for-systems-engineers/modules/03-generics/go
+cpu: Apple M4 Pro
+             │     go      │
+             │   sec/op    │
+Concrete-14    240.3n ± 1%
+Generic-14     239.3n ± 1%
+Interface-14   1.053µ ± 0%
+geomean        392.7n
+
+             │      go      │
+             │     B/op     │
+Concrete-14    0.000 ± 0%
+Generic-14     0.000 ± 0%
+Interface-14   0.000 ± 0%
+geomean                   ¹
+¹ summaries must be >0 to compute geomean
+
+             │      go      │
+             │  allocs/op   │
+Concrete-14    0.000 ± 0%
+Generic-14     0.000 ± 0%
+Interface-14   0.000 ± 0%
+geomean                   ¹
+¹ summaries must be >0 to compute geomean

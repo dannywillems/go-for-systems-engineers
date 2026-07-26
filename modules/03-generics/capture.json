@@ -1,0 +1,41 @@
+{
+  "outputs": {
+    "go-demo":    { "dir": "go",    "cmd": ["go", "run", "./cmd/demo"], "showCmd": true },
+    "rust-demo":  { "dir": "rust",  "cmd": ["cargo", "run", "--quiet", "--bin", "demo"], "showCmd": true },
+    "ocaml-demo": { "dir": "ocaml", "cmd": ["dune", "exec", "bin/main.exe"], "showCmd": true },
+    "swift-demo": { "cmd": ["bash", "../../scripts/run-swift.sh", "swift"] },
+    "kotlin-demo": { "cmd": ["bash", "../../scripts/run-kotlin.sh", "kotlin"] },
+
+    "go-shapes": {
+      "dir": "go",
+      "cmd": ["bash", "-c", "go build -gcflags=-S ./... 2>&1 | grep -oE '[A-Za-z0-9_./]*Identity\\[[^]]*\\]' | grep 'go.shape' | sed 's#.*/go\\.#gen.#' | sort -u"],
+      "portable": false
+    },
+    "go-hkt-reject": {
+      "dir": "reject-go-hkt",
+      "cmd": ["bash", "-c", "go build ./... 2>&1 | grep -i 'not a generic type' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    },
+    "go-binsize": {
+      "dir": "go",
+      "cmd": ["bash", "-c", "go build -o /tmp/gen_go_demo ./cmd/demo && printf 'Go demo binary:            %d bytes\\n' \"$(wc -c < /tmp/gen_go_demo | tr -d ' ')\""],
+      "portable": false
+    },
+    "rust-binsize": {
+      "dir": "rust",
+      "cmd": ["bash", "-c", "cargo build --release --bin demo >/dev/null 2>&1 && printf 'Rust demo binary (release): %d bytes\\n' \"$(wc -c < target/release/demo | tr -d ' ')\""],
+      "portable": false
+    }
+  },
+  "snippets": {
+    "go-sum":   { "file": "go/sum.go",   "region": "sum" },
+    "go-shape": { "file": "go/shape.go", "region": "shape" },
+    "rust-sum": { "file": "rust/src/lib.rs",      "region": "sum" },
+    "ocaml-functor": { "file": "ocaml/lib/gen.ml", "region": "functor" },
+    "swift-sum": { "file": "swift/Sources/Gen/Gen.swift", "region": "sum" },
+    "kotlin-generic": { "file": "kotlin/lib/Gen.kt", "region": "generic" }
+  },
+  "files": {
+    "go-bench": { "file": "go/bench.txt", "portable": false }
+  }
+}

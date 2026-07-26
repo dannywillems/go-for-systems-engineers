@@ -1,0 +1,17 @@
+[package]
+name = "genr"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+name = "genr"
+path = "src/lib.rs"
+
+[[bin]]
+name = "demo"
+path = "src/bin/demo.rs"
+
+[profile.release]
+lto = true
+codegen-units = 1

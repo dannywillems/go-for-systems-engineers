@@ -1,0 +1,5 @@
+(test
+ (name test_gen)
+ (libraries gen)
+ (flags
+  (:standard -w +a-70 -warn-error +a)))

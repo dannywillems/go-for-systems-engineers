@@ -20,7 +20,7 @@ Apple M4 Pro (14 cores), macOS arm64.
 | 00  | Bootstrap                     | done    | capture engine, Makefile, CI, 5-lang build, bench harness |
 | 01  | Interfaces & dispatch         | done    | itab/existentials, devirt (-m), dispatch bench, Rust orphan-rule reject |
 | 02  | No sum types + analyzer       | done    | go/analysis exhaustiveness pass (+analysistest, CI), 4-language reject captures, Option/niche |
-| 03  | Generics / GCShape            | pending |                                                   |
+| 03  | Generics / GCShape            | done    | GCShape objdump (pointer collapse to *uint8), stencil bench (generic≈concrete≪interface), HKT reject, honest Go-vs-Rust binary size, functors/witness/erasure |
 | 04  | Errors                        | done    | (T,error) product-not-sum (io.EOF), typed nil, Result monad laws + unusable, errcheck + generic-method rejects |
 | 05  | Memory, layout, allocations   | pending |                                                   |
 | 06  | Memory model & data races     | done    | -race capture, dynamic-detector limits, goleak, errgroup; Rust Send/Sync + Swift 6 Sendable rejects; OCaml domains/Atomic; atomic-vs-mutex bench; References |
