@@ -1,0 +1,33 @@
+{
+  "outputs": {
+    "go-reject": {
+      "dir": "reject-internal",
+      "cmd": ["bash", "-c", "go build ./... 2>&1 | grep -i 'use of internal package' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    },
+    "rust-reject": {
+      "dir": "reject-rust",
+      "cmd": ["bash", "-c", "cargo build 2>&1 | grep -E 'E0616|is private' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    },
+    "ocaml-reject": {
+      "dir": "reject-ocaml",
+      "cmd": ["bash", "-c", "dune build 2>&1 | grep -i 'Unbound record field' | head -1"],
+      "allowError": true, "portable": false
+    },
+    "swift-reject": {
+      "dir": "reject-swift",
+      "cmd": ["bash", "-c", "swiftc -typecheck reject.swift 2>&1 | grep -i 'inaccessible due to' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    },
+    "kotlin-reject": {
+      "dir": "reject-kotlin",
+      "cmd": ["bash", "-c", "kotlinc reject.kt -include-runtime -d /tmp/rk8.jar 2>&1 | grep -i 'cannot access' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    }
+  },
+  "snippets": {
+    "go-opaque": { "file": "go/account.go", "region": "opaque" },
+    "ocaml-mli": { "file": "ocaml/lib/account.mli", "region": "mli" }
+  }
+}
