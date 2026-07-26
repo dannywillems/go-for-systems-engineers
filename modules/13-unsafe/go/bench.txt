@@ -1,0 +1,23 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/dannywillems/go-for-systems-engineers/modules/13-unsafe/go
+cpu: Apple M4 Pro
+                  │     go      │
+                  │   sec/op    │
+StdStringCopy-14    11.26n ± 1%
+ZeroCopyString-14   1.577n ± 0%
+geomean             4.215n
+
+                  │      go      │
+                  │     B/op     │
+StdStringCopy-14    80.00 ± 0%
+ZeroCopyString-14   0.000 ± 0%
+geomean                        ¹
+¹ summaries must be >0 to compute geomean
+
+                  │      go      │
+                  │  allocs/op   │
+StdStringCopy-14    1.000 ± 0%
+ZeroCopyString-14   0.000 ± 0%
+geomean                        ¹
+¹ summaries must be >0 to compute geomean

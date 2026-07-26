@@ -33,3 +33,8 @@ linters:
       - path: tools/capture/
         linters:
           - gosec
+      # Module 13 demonstrates `unsafe` deliberately; gosec G103 (use of unsafe)
+      # would flag every line that is the module's whole subject.
+      - path: 13-unsafe/
+        linters:
+          - gosec

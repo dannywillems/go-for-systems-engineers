@@ -1,0 +1,17 @@
+{
+  "outputs": {
+    "go-demo":    { "dir": "go",    "cmd": ["go", "run", "./cmd/demo"], "showCmd": true },
+    "rust-demo":  { "dir": "rust",  "cmd": ["cargo", "run", "--quiet", "--bin", "demo"], "showCmd": true },
+    "ocaml-demo": { "dir": "ocaml", "cmd": ["dune", "exec", "bin/main.exe"], "showCmd": true },
+    "swift-demo": { "cmd": ["bash", "../../scripts/run-swift.sh", "swift"] },
+    "kotlin-demo": { "cmd": ["bash", "../../scripts/run-kotlin.sh", "kotlin"] }
+  },
+  "snippets": {
+    "go-zerocopy": { "file": "go/unsafe.go", "region": "zerocopy" },
+    "rust-unsafe": { "file": "rust/src/lib.rs", "region": "unsafe" },
+    "ocaml-unsafe": { "file": "ocaml/lib/un.ml", "region": "unsafe" }
+  },
+  "files": {
+    "go-bench": { "file": "go/bench.txt", "portable": false }
+  }
+}
