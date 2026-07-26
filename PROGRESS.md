@@ -18,7 +18,7 @@ Apple M4 Pro (14 cores), macOS arm64.
 | #   | Module                        | Status  | Notes                                             |
 | --- | ----------------------------- | ------- | ------------------------------------------------- |
 | 00  | Bootstrap                     | done    | capture engine, Makefile, CI, 5-lang build, bench harness |
-| 01  | Interfaces & dispatch         | pending |                                                   |
+| 01  | Interfaces & dispatch         | done    | itab/existentials, devirt (-m), dispatch bench, Rust orphan-rule reject |
 | 02  | No sum types + analyzer       | pending |                                                   |
 | 03  | Generics / GCShape            | pending |                                                   |
 | 04  | Errors                        | pending |                                                   |

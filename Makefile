@@ -42,18 +42,21 @@ else
   MODULE_GLOB := $(SCOPE)
 endif
 
-# go.mod dirs, excluding reader exercises (red by design) and solutions.
+# Dirs named reject-* hold code that is EXPECTED TO FAIL to compile (orphan-rule
+# and exhaustiveness demos); capture builds them on purpose, the build/test/lint
+# targets skip them. Reader exercises are red by design; solutions run separately.
+REJECT := -not -path '*/reject-*/*'
 GO_DIRS := $(shell find $(SCOPE) -name go.mod \
-	-not -path '*/exercises/*' -not -path '*/solutions/*' \
+	-not -path '*/exercises/*' -not -path '*/solutions/*' $(REJECT) \
 	2>/dev/null | xargs -n1 dirname | sort -u)
 RUST_DIRS := $(shell find $(MODULE_GLOB) -name Cargo.toml -not -path '*/target/*' \
-	2>/dev/null | xargs -n1 dirname | sort -u)
+	$(REJECT) 2>/dev/null | xargs -n1 dirname | sort -u)
 OCAML_DIRS := $(shell find $(MODULE_GLOB) -name dune-project -not -path '*/_build/*' \
-	2>/dev/null | xargs -n1 dirname | sort -u)
+	$(REJECT) 2>/dev/null | xargs -n1 dirname | sort -u)
 SWIFT_DIRS := $(shell find $(MODULE_GLOB) -name Package.swift -not -path '*/.build/*' \
-	2>/dev/null | xargs -n1 dirname | sort -u)
+	$(REJECT) 2>/dev/null | xargs -n1 dirname | sort -u)
 KOTLIN_DIRS := $(shell find $(MODULE_GLOB) -type d -name kotlin -not -path '*/build/*' \
-	2>/dev/null | sort -u)
+	$(REJECT) 2>/dev/null | sort -u)
 SOLUTION_DIRS := $(shell find $(MODULE_GLOB) -path '*/solutions/*' -name go.mod \
 	2>/dev/null | xargs -n1 dirname | sort -u)
 

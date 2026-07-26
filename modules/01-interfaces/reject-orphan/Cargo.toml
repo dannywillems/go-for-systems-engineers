@@ -1,0 +1,11 @@
+[package]
+name = "reject-orphan"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# This crate is EXPECTED TO FAIL to compile. It is excluded from `make build`
+# by the `reject-*` naming convention; the capture tool builds it on purpose to
+# inject the coherence (orphan-rule) error into the README.
+[lib]
+path = "src/lib.rs"

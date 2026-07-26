@@ -1,0 +1,26 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/dannywillems/go-for-systems-engineers/modules/01-interfaces/go
+cpu: Apple M4 Pro
+             │     go      │
+             │   sec/op    │
+Direct-14      747.5n ± 0%
+Interface-14   2.605µ ± 0%
+Devirt-14      1.340µ ± 0%
+geomean        1.377µ
+
+             │      go      │
+             │     B/op     │
+Direct-14      0.000 ± 0%
+Interface-14   0.000 ± 0%
+Devirt-14      0.000 ± 0%
+geomean                   ¹
+¹ summaries must be >0 to compute geomean
+
+             │      go      │
+             │  allocs/op   │
+Direct-14      0.000 ± 0%
+Interface-14   0.000 ± 0%
+Devirt-14      0.000 ± 0%
+geomean                   ¹
+¹ summaries must be >0 to compute geomean

@@ -1,0 +1,4 @@
+(library
+ (name shapes)
+ (flags
+  (:standard -w +a-70 -warn-error +a)))
