@@ -94,8 +94,10 @@ The detector is dynamic. It reports a race only on the interleaving that
 actually happened; a race on a code path not exercised in the run is **not**
 reported. `-race` is a testing tool, not a proof of race-freedom. Under a race,
 Go is not even memory-safe: a concurrent write to a two-word `interface` or
-slice header can be read torn (type word from one value, data word from
-another), which is undefined behavior, not just a wrong number.
+three-word slice header (see the header layouts in
+[Module 05](../05-memory/README.md#memory-layout-of-the-core-types)) can be read
+torn (type word from one value, data word from another), which is undefined
+behavior, not just a wrong number.
 
 The synchronized results, deterministic and captured:
 

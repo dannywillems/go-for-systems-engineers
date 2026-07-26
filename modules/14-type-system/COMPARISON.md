@@ -10,10 +10,10 @@ in this module and Modules 01–04.
 | ------- | -- | ---- | ----- | ----- | ------ |
 | Parametric generics | yes | yes | yes | yes | yes |
 | Generic methods (new type param on a method) | **no** (M04) | yes | yes | yes | yes |
-| Higher-kinded types (`F[_]`) | **no** (M03) | no (workarounds) | yes (functors) | no | no |
+| Higher-kinded types (`F[_]`) | **no** (M03) | no (workarounds) | module-level (functors), not first-class | no | no |
 | Sum types / exhaustive match | **no** (M02, analyzer) | yes | yes | yes | yes |
 | GADTs (type-indexed constructors) | no | partial | **yes** | no | no |
-| Declaration-site variance | no | no (use-site via bounds) | yes (`+`/`-`) | no | **yes** (`in`/`out`) |
+| Declaration-site variance | no | no (variance inferred structurally) | yes (`+`/`-`) | no | **yes** (`in`/`out`) |
 | Phantom types | yes (type params) | yes (`PhantomData`) | yes | yes | yes |
 | Typestate (compile-time state machine) | limited | **yes** | yes | yes | limited |
 | Existentials | interfaces (implicit) | `dyn`/`impl` | first-class modules (explicit) | `any`/`some` | interfaces |

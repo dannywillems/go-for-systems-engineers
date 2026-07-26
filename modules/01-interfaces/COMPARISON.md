@@ -10,7 +10,9 @@ workload is realistic rather than a single multiply).
 
 Every language answers "how does one value stand for many types?" on two axes:
 **nominal vs structural** (does satisfaction require a declaration?) and
-**universal vs existential** (is the concrete type erased at runtime?).
+**universal vs existential** (is the concrete type resolved statically and
+specialized away, or hidden behind the abstraction and carried at runtime as a
+witness?).
 
 | Language | Abstraction | Satisfaction | Static path | Dynamic path (existential) | Orphan rule |
 | -------- | ----------- | ------------ | ----------- | -------------------------- | ----------- |

@@ -10,6 +10,7 @@ cross-language allocation numbers hold two surprises, measured below.
 ## Contents
 
 - [Struct layout and padding](#struct-layout-and-padding)
+- [Memory layout of the core types](#memory-layout-of-the-core-types)
 - [Escape analysis](#escape-analysis)
 - [Slice aliasing](#slice-aliasing)
 - [GC: throughput vs RSS, and the cross-language surprise](#gc-throughput-vs-rss-and-the-cross-language-surprise)
@@ -57,6 +58,74 @@ The `fieldalignment` analyzer (in `golangci-lint`) flags the wasteful order;
 across a large slice the 8 bytes/element is real memory. Rust's `repr(Rust)`
 reorders fields automatically, so this footgun does not exist there; Go keeps
 declaration order and leaves the ordering to you.
+
+## Memory layout of the core types
+
+A struct's fields are laid out inline, but Go's built-in reference types are
+themselves small fixed-size **headers** that point at (or describe) data
+elsewhere. Their sizes are a compile-time constant `unsafe.Sizeof`, so they are
+falsifiable facts, not lore. On a 64-bit target (1 word = 8 bytes):
+
+<!-- BEGIN:output go-layout -->
+```text
+$ go run ./cmd/layout
+[]int (slice)          24 bytes  (3 words)
+string                 16 bytes  (2 words)
+any / interface{}      16 bytes  (2 words)
+error (interface)      16 bytes  (2 words)
+interface{M()}         16 bytes  (2 words)
+map[int]int             8 bytes  (1 word)
+chan int                8 bytes  (1 word)
+*int (pointer)          8 bytes  (1 word)
+bool                    1 byte
+```
+<!-- END:output go-layout -->
+
+The header of each is:
+
+```text
+[]int   (slice)   3 words     string           2 words
++--------+        +--------+   +--------+
+| ptr    | -----> backing     | ptr    | -----> bytes (read-only,
++--------+        array        +--------+         no NUL terminator)
+| len    |                     | len    |
++--------+                     +--------+
+| cap    |
++--------+
+
+any / interface{}  2 words     error, interface{M()}   2 words
++--------+                      +--------+
+| _type  | -> *rtype (type      | itab   | -> *itab = (interface type,
++--------+     descriptor)      +--------+     concrete *_type, method
+| data   | -> the value         | data   |     pointers filled by the
++--------+    (boxed if it       +--------+     linker at the coercion)
+              does not fit
+              in a word)
+
+map[int]int   1 word            chan int   1 word
++--------+                       +--------+
+| *hmap  | -> hash table         | *hchan | -> ring buffer + two wait
++--------+    (buckets,          +--------+     queues + a lock; the
+              overflow, seed)                   header is just the pointer
+```
+
+Three consequences the rest of this module and Module 06 build on:
+
+- A slice is a *view*: copying a slice value copies only the 3-word header, so
+  two slices can share one backing array (the [aliasing](#slice-aliasing) trap).
+- An empty interface holding a value that does not fit in one word (anything but
+  a pointer-shaped value) must **box** it on the heap — the `data` word has to
+  point somewhere. That is why `any(tinyInt)` allocates (see
+  [escape analysis](#escape-analysis)).
+- The 2-word interface and 3-word slice headers are not written atomically, so a
+  racing write can be read **torn** — half from one value, half from another —
+  which is why Go under a data race is not even memory-safe (Module 06).
+
+`map` and `chan` variables are single pointers to a runtime structure (`hmap`,
+`hchan`); the interesting layout is inside those, off the stack. `interface{M()}`
+and `error` carry an `itab` rather than a bare `*_type`: the `itab` additionally
+holds the resolved method pointers for that (interface, concrete-type) pair, the
+witness table of Module 01's existential.
 
 ## Escape analysis
 

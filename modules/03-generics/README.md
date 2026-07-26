@@ -1,11 +1,14 @@
 # 03 — Generics: type sets, GCShape, dictionaries
 
 **Thesis.** Go generics are a **hybrid** between Rust/C++ full monomorphization
-and Java/OCaml uniform boxing. The compiler emits one instantiation per *GC
-shape*: each distinct value type gets its own stencil (as fast as hand-written
-code), while **all pointer types collapse to a single shape**
-(`go.shape.*uint8`) that shares one stencil plus a runtime **dictionary**. Two
-things are inexpressible: generic methods (Module 04) and higher-kinded types.
+and Java/OCaml uniform boxing. The compiler emits one stencil per *GC shape*,
+not per type: for a value type the shape is essentially its **underlying type**
+(so `int` and `float64` get their own stencils, but two named types sharing an
+underlying type — `float64` and a `type Celsius float64` — share one), while
+**all pointer types collapse to a single shape** (`go.shape.*uint8`) that shares
+one stencil plus a runtime **dictionary**. Value shapes run at hand-written
+speed; the pointer shape pays a dictionary indirection. Two things are
+inexpressible: generic methods (Module 04) and higher-kinded types.
 
 ## Type sets and stenciling
 
@@ -73,25 +76,33 @@ value types.
 ## GCShape: the pointer collapse
 
 The mechanism is visible in the compiled assembly. `Identity` is instantiated at
-six types; the emitted shapes are:
+seven types; the emitted shapes are:
 
 <!-- BEGIN:snippet go-shape -->
 ```go
 // Identity is generic over any type. The instantiations forced by Shapes below
-// expose GCShape stenciling in the compiled assembly (see the README): each
-// value type gets its OWN shape, while every pointer type collapses to the one
-// shared shape go.shape.*uint8 (which then relies on a runtime dictionary).
+// expose GCShape stenciling in the compiled assembly (see the README): the
+// compiler emits ONE stencil per GC shape, not per type. For a value type the
+// shape is essentially its UNDERLYING type, so int and float64 differ but
+// Celsius (underlying float64) shares float64's shape; every pointer type
+// collapses to the one shared shape go.shape.*uint8 (which relies on a runtime
+// dictionary).
 func Identity[T any](x T) T { return x }
 
 type Cat struct{ Legs int }
 
 type Dog struct{ Tail bool }
 
+// Celsius has underlying type float64, so it carries no shape of its own: it
+// shares go.shape.float64 with float64. Instantiating it adds no shape line.
+type Celsius float64
+
 // Shapes forces the compiler to emit the instantiations the README inspects.
 func Shapes() {
 	_ = Identity[int](0)
 	_ = Identity[int64](0)
 	_ = Identity[float64](0)
+	_ = Identity[Celsius](0) // collapses into go.shape.float64
 	_ = Identity[string]("")
 	_ = Identity[*Cat](nil)
 	_ = Identity[*Dog](nil)
@@ -109,11 +120,14 @@ gen.Identity[go.shape.string]
 ```
 <!-- END:output go-shapes -->
 
-Six instantiations, **five** shapes: `*Cat` and `*Dog` both became
-`go.shape.*uint8`. Distinct value types keep distinct stencils; all pointers
-share one, and the concrete type is recovered at runtime from a per-call
-dictionary. This is why a generic over pointer types is not fully monomorphized:
-it pays a dictionary indirection Rust does not.
+**Seven** instantiations, **five** shapes. Two collapses are visible: `*Cat` and
+`*Dog` both became `go.shape.*uint8`, and `Celsius` carries no shape of its own —
+there is no `go.shape.Celsius`, because its underlying type is `float64`, so it
+shares `go.shape.float64`. Value types with *distinct underlying types* keep
+distinct stencils; value types sharing an underlying type, and all pointer types,
+do not. On the pointer path the concrete type is recovered at runtime from a
+per-call dictionary, which is why a generic over pointer types is not fully
+monomorphized: it pays a dictionary indirection Rust does not.
 
 ## Higher-kinded types are inexpressible
 
