@@ -1,0 +1,27 @@
+# golangci-lint v2 configuration. The linter set is the one named in the repo
+# CI spec. Demonstration code that intentionally violates a lint (e.g. Module
+# 05's deliberately misaligned struct) carries a documented `//nolint:<name>`
+# with a reason; nothing is silenced as a blanket "mitigation".
+version: "2"
+
+linters:
+  default: none
+  enable:
+    - errcheck # unchecked errors (the #[must_use] gap; Module 04)
+    - govet
+    - staticcheck
+    - bodyclose # unclosed http.Response.Body
+    - nilerr # returning nil after a non-nil err
+    - contextcheck # context propagation
+    - gosec # security lints
+  settings:
+    govet:
+      enable:
+        - fieldalignment # struct padding (Module 05)
+  exclusions:
+    rules:
+      # Exercise stubs return zero values that trip nilerr/errcheck by design.
+      - path: exercises/
+        linters:
+          - errcheck
+          - nilerr

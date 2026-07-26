@@ -1,0 +1,16 @@
+[package]
+name = "bootstrap"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+name = "bootstrap"
+path = "src/lib.rs"
+
+[[bin]]
+name = "demo"
+path = "src/main.rs"
+
+[profile.release]
+lto = true

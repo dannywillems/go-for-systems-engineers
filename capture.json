@@ -1,0 +1,7 @@
+{
+  // Root manifest, for the top-level README. Module manifests live in each
+  // modules/NN-*/capture.json. capture uses the nearest ancestor manifest.
+  "outputs": {
+    "versions": { "cmd": ["bash", "scripts/versions.sh"], "portable": false }
+  }
+}

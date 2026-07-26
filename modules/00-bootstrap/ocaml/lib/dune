@@ -1,0 +1,4 @@
+(library
+ (name bootstrap)
+ (flags
+  (:standard -w +a-70 -warn-error +a)))

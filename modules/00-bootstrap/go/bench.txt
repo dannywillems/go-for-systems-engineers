@@ -1,0 +1,15 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/dannywillems/go-for-systems-engineers/modules/00-bootstrap/go
+cpu: Apple M4 Pro
+       │     go      │
+       │   sec/op    │
+Sum-14   229.6µ ± 0%
+
+       │     go     │
+       │    B/op    │
+Sum-14   0.000 ± 0%
+
+       │     go     │
+       │ allocs/op  │
+Sum-14   0.000 ± 0%

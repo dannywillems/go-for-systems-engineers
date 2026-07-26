@@ -1,0 +1,26 @@
+{
+  // Every generated block in this module's README.md / COMPARISON.md is declared
+  // here. `make docs` runs these; the docs-fresh CI gate fails if a *portable*
+  // block drifts. portable:false blocks are regenerated locally but skipped by
+  // the gate because they capture machine/arch-specific facts.
+  "outputs": {
+    "go-demo":    { "dir": "go",    "cmd": ["go", "run", "./cmd/demo"], "showCmd": true },
+    "rust-demo":  { "dir": "rust",  "cmd": ["cargo", "run", "--quiet", "--bin", "demo"], "showCmd": true },
+    "ocaml-demo": { "dir": "ocaml", "cmd": ["dune", "exec", "bin/main.exe"], "showCmd": true },
+    "swift-demo": { "cmd": ["bash", "../../scripts/run-swift.sh", "swift"] },
+    "kotlin-demo": { "cmd": ["bash", "../../scripts/run-kotlin.sh", "kotlin"] },
+
+    "go-version": { "dir": "go", "cmd": ["go", "version"], "showCmd": true, "portable": false },
+    "toolchain-versions": { "cmd": ["bash", "../../scripts/versions.sh"], "portable": false }
+  },
+  "snippets": {
+    "go-sum":     { "file": "go/sum.go",              "region": "sum" },
+    "rust-sum":   { "file": "rust/src/lib.rs",        "region": "sum" },
+    "ocaml-sum":  { "file": "ocaml/lib/bootstrap.ml", "region": "sum" },
+    "swift-sum":  { "file": "swift/Sources/Bootstrap/Bootstrap.swift", "region": "sum" },
+    "kotlin-sum": { "file": "kotlin/lib/Bootstrap.kt", "region": "sum" }
+  },
+  "files": {
+    "go-bench": { "file": "go/bench.txt", "portable": false }
+  }
+}
