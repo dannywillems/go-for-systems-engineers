@@ -1,0 +1,11 @@
+{
+  "outputs": {
+    "go-demo": { "dir": "go", "cmd": ["go", "run", "./cmd/demo"], "showCmd": true, "normalize": ["goid"] }
+  },
+  "snippets": {
+    "go-pool": { "file": "go/sched.go", "region": "pool" }
+  },
+  "files": {
+    "measured": { "file": "measured.txt", "portable": false }
+  }
+}

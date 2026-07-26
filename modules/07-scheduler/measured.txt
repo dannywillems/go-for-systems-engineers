@@ -1,0 +1,14 @@
+machine: Apple M4 Pro (14 cores), macOS arm64
+
+# Go scheduler: task-completion latency vs worker count (CPU-bound)
+GOMAXPROCS=14, 200000 CPU-bound tasks
+workers=GOMAXPROCS(14) p50=31µs     p99=292µs    p999=917µs    max=1.205ms
+workers=2 (limited)    p50=28.57ms  p99=48.711ms p999=49.059ms max=49.097ms
+workers=4x(56) oversub p50=16µs     p99=137µs    p999=203µs    max=355µs
+
+# Cross-language: CPU-bound parallel sqrt-sum, 400M terms (optimized)
+Go     sqrt-sum 400M / 14 goroutines: 39 ms
+OCaml  sqrt-sum 400M / 14 domains: 35 ms
+Rust   sqrt-sum 400M / 14 threads: 33 ms
+Swift  sqrt-sum 400M / 14 tasks: 33 ms
+Kotlin sqrt-sum 400M / 14 threads: 34 ms

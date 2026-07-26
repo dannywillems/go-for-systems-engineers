@@ -24,7 +24,7 @@ Apple M4 Pro (14 cores), macOS arm64.
 | 04  | Errors                        | done    | (T,error) product-not-sum (io.EOF), typed nil, Result monad laws + unusable, errcheck + generic-method rejects |
 | 05  | Memory, layout, allocations   | done    | padding/fieldalignment, escape analysis (-m), slice aliasing, GOGC throughput-vs-RSS, 5-language alloc bench (OCaml minor GC beats Go; GCs beat malloc here) |
 | 06  | Memory model & data races     | done    | -race capture, dynamic-detector limits, goleak, errgroup; Rust Send/Sync + Swift 6 Sendable rejects; OCaml domains/Atomic; atomic-vs-mutex bench; References |
-| 07  | Scheduler                     | pending |                                                   |
+| 07  | Scheduler                     | done    | GMP + async preemption (100k goroutines), p50/p99 latency vs worker count, GOMAXPROCS/cgroup (Go 1.25 fix), 5-language CPU throughput (all within ~15%) |
 | 08  | API design & boundaries       | pending |                                                   |
 | 09  | Reflection & codegen          | pending |                                                   |
 | 10  | Observability & performance   | pending |                                                   |
