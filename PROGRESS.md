@@ -29,7 +29,7 @@ Apple M4 Pro (14 cores), macOS arm64.
 | 09  | Reflection & codegen          | pending |                                                   |
 | 10  | Observability & performance   | pending |                                                   |
 | 11  | Testing                       | pending |                                                   |
-| 12  | Capstone                      | pending |                                                   |
+| 12  | Capstone                      | done    | concurrent bounded cache (mutex+eviction+semaphore backpressure+ctx shutdown) in 5 langs; throughput+p50/p99/p999 bench + migration matrix (binary/LOC/cold-compile); actor trades throughput for a tight tail |
 | 13  | Unsafe                        | done    | unsafe.String/Slice zero-copy (1.6ns/0 allocs vs 11ns/80B), Offsetof layout, uintptr GC hazard; Rust/Miri, OCaml Obj.magic, Swift withUnsafeBytes, JVM FFM/ByteBuffer |
 | 14  | Type-system quirks            | done    | Go phantom type params, Rust typestate, OCaml GADT eval, Swift typestate, Kotlin variance; 4 compile-rejects; expressiveness matrix |
 

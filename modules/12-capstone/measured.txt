@@ -1,0 +1,19 @@
+machine: Apple M4 Pro (14 cores), macOS arm64
+workload: 640k concurrent Get / 64 workers over a 256-entry bounded
+cache; backend fetch sleeps 100us; hot set == capacity so the cache
+absorbs ~99.9% of load. HTTP transport omitted (dependency-free).
+
+# Throughput and latency (single run, optimized)
+Go     640k gets/64w: 6677 kops/s  p50=200ns p99=298µs p999=953.3µs  backend=0.1% of gets
+Rust   640k gets/64w: 7122 kops/s  p50=42ns p99=346.125µs p999=948.958µs  backend=0.1% of gets
+OCaml  640k gets/64w: 5413 kops/s  p50=0.0us p99=266.1us p999=1241.9us  backend=0.1% of gets
+Swift  640k gets/64w: 2794 kops/s  p50=21.0us p99=41.2us p999=59.9us  backend=0.0% of gets
+Kotlin 640k gets/64w: 7357 kops/s  p50=0.1us p99=374.0us p999=622.7us  backend=0.1% of gets
+
+# Migration matrix
+lang     binary         core-LOC   cold-compile-s
+Go       2580770        83         1.5
+Rust     495136         100        0.4
+OCaml    1501304        43         0.4
+Swift    91000          28         2.0
+Kotlin   5614009        31         2.2

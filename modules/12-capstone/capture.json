@@ -1,0 +1,8 @@
+{
+  "snippets": {
+    "go-cache": { "file": "go/cache.go", "region": "cache" }
+  },
+  "files": {
+    "measured": { "file": "measured.txt", "portable": false }
+  }
+}

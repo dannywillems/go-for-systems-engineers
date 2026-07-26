@@ -1,0 +1,5 @@
+(test
+ (name test_capstone)
+ (libraries capstone)
+ (flags
+  (:standard -w +a-70 -warn-error +a)))
