@@ -1,0 +1,13 @@
+[package]
+name = "errs"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[lib]
+name = "errs"
+path = "src/lib.rs"
+
+[[bin]]
+name = "demo"
+path = "src/bin/demo.rs"

@@ -1,0 +1,5 @@
+(executable
+ (name main)
+ (libraries errs)
+ (flags
+  (:standard -w +a-70 -warn-error +a)))

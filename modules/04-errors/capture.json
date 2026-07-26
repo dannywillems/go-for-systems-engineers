@@ -1,0 +1,29 @@
+{
+  "outputs": {
+    "go-demo":    { "dir": "go",    "cmd": ["go", "run", "./cmd/demo"], "showCmd": true },
+    "rust-demo":  { "dir": "rust",  "cmd": ["cargo", "run", "--quiet", "--bin", "demo"], "showCmd": true },
+    "ocaml-demo": { "dir": "ocaml", "cmd": ["dune", "exec", "bin/main.exe"], "showCmd": true },
+    "swift-demo": { "cmd": ["bash", "../../scripts/run-swift.sh", "swift"] },
+    "kotlin-demo": { "cmd": ["bash", "../../scripts/run-kotlin.sh", "kotlin"] },
+
+    "go-genericmethod-reject": {
+      "dir": "reject-genericmethod",
+      "cmd": ["bash", "-c", "go build ./... 2>&1 | grep -i 'type parameters' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    },
+    "go-errcheck": {
+      "dir": "reject-errcheck",
+      "cmd": ["bash", "-c", "golangci-lint run --no-config --default=none --enable=errcheck ./... 2>&1 | grep -i 'not checked' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    }
+  },
+  "snippets": {
+    "go-reader":   { "file": "go/product.go", "region": "reader" },
+    "go-result":   { "file": "go/result.go",  "region": "result" },
+    "go-typednil": { "file": "go/wrap.go",     "region": "typednil" },
+    "rust-result":  { "file": "rust/src/lib.rs",         "region": "result" },
+    "ocaml-result": { "file": "ocaml/lib/errs.ml",       "region": "result" },
+    "swift-result": { "file": "swift/Sources/Errs/Errs.swift", "region": "result" },
+    "kotlin-result": { "file": "kotlin/lib/Errs.kt",     "region": "result" }
+  }
+}

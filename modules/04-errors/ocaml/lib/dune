@@ -1,0 +1,4 @@
+(library
+ (name errs)
+ (flags
+  (:standard -w +a-70 -warn-error +a)))
