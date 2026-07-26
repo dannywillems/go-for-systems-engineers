@@ -123,7 +123,7 @@ func langFromExt(path string) string {
 
 var (
 	reAddr  = regexp.MustCompile(`0x[0-9a-fA-F]+`)
-	reGoid  = regexp.MustCompile(`goroutine \d+`)
+	reGoid  = regexp.MustCompile(`[Gg]oroutine \d+`)
 	reGover = regexp.MustCompile(`go1\.\d+(\.\d+)?`)
 	reMulti = regexp.MustCompile(`\n{3,}`)
 )

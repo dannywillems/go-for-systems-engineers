@@ -1,0 +1,23 @@
+goos: darwin
+goarch: arm64
+pkg: github.com/dannywillems/go-for-systems-engineers/modules/06-memory-model/go
+cpu: Apple M4 Pro
+          │     go      │
+          │   sec/op    │
+Atomic-14   51.26n ± 5%
+Mutex-14    107.1n ± 1%
+geomean     74.09n
+
+          │      go      │
+          │     B/op     │
+Atomic-14   0.000 ± 0%
+Mutex-14    0.000 ± 0%
+geomean                ¹
+¹ summaries must be >0 to compute geomean
+
+          │      go      │
+          │  allocs/op   │
+Atomic-14   0.000 ± 0%
+Mutex-14    0.000 ± 0%
+geomean                ¹
+¹ summaries must be >0 to compute geomean

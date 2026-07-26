@@ -1,0 +1,9 @@
+[package]
+name = "reject-race"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+# EXPECTED TO FAIL. Excluded from `make build`; capture builds it to show that
+# the data race Go accepts is a COMPILE ERROR in Rust (Send/Sync in the type
+# system). src/main.rs is a binary crate.

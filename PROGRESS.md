@@ -23,7 +23,7 @@ Apple M4 Pro (14 cores), macOS arm64.
 | 03  | Generics / GCShape            | pending |                                                   |
 | 04  | Errors                        | done    | (T,error) product-not-sum (io.EOF), typed nil, Result monad laws + unusable, errcheck + generic-method rejects |
 | 05  | Memory, layout, allocations   | pending |                                                   |
-| 06  | Memory model & data races     | pending |                                                   |
+| 06  | Memory model & data races     | done    | -race capture, dynamic-detector limits, goleak, errgroup; Rust Send/Sync + Swift 6 Sendable rejects; OCaml domains/Atomic; atomic-vs-mutex bench; References |
 | 07  | Scheduler                     | pending |                                                   |
 | 08  | API design & boundaries       | pending |                                                   |
 | 09  | Reflection & codegen          | pending |                                                   |

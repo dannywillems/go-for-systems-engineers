@@ -1,0 +1,41 @@
+{
+  "outputs": {
+    "go-demo":    { "dir": "go",    "cmd": ["go", "run", "./cmd/demo"], "showCmd": true },
+    "rust-demo":  { "dir": "rust",  "cmd": ["cargo", "run", "--quiet", "--bin", "demo"], "showCmd": true },
+    "ocaml-demo": { "dir": "ocaml", "cmd": ["dune", "exec", "bin/main.exe"], "showCmd": true },
+    "swift-demo": { "cmd": ["bash", "../../scripts/run-swift.sh", "swift"] },
+    "kotlin-demo": { "cmd": ["bash", "../../scripts/run-kotlin.sh", "kotlin"] },
+
+    "go-race": {
+      "dir": "go",
+      "cmd": ["bash", "-c", "go test -race -tags racedemo -run TestDataRace ./... 2>&1 | grep -E 'WARNING: DATA RACE|at 0x[0-9a-f]+ by goroutine' | head -3"],
+      "allowError": true, "portable": false, "normalize": ["addr", "goid"]
+    },
+    "go-leak": {
+      "dir": "go",
+      "cmd": ["bash", "-c", "go test -tags leakdemo -run TestGoroutineLeak ./... 2>&1 | grep -E 'found unexpected goroutines' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    },
+    "rust-reject": {
+      "dir": "reject-rust",
+      "cmd": ["bash", "-c", "cargo build 2>&1 | grep -E 'E0277|cannot be sent' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
+    },
+    "swift-reject": {
+      "dir": "reject-swift",
+      "cmd": ["bash", "-c", "swiftc -swift-version 6 -typecheck reject.swift 2>&1 | grep -iE 'can not be mutated|concurrency-safe|shared mutable' | head -1"],
+      "allowError": true, "portable": false
+    }
+  },
+  "snippets": {
+    "go-counters": { "file": "go/counter.go",  "region": "counters" },
+    "go-pipeline": { "file": "go/pipeline.go", "region": "pipeline" },
+    "rust-atomic": { "file": "rust/src/lib.rs",         "region": "atomic" },
+    "ocaml-atomic": { "file": "ocaml/lib/conc.ml",      "region": "atomic" },
+    "swift-actor": { "file": "swift/Sources/Conc/Conc.swift", "region": "actor" },
+    "kotlin-atomic": { "file": "kotlin/lib/Conc.kt",    "region": "atomic" }
+  },
+  "files": {
+    "go-bench": { "file": "go/bench.txt", "portable": false }
+  }
+}
