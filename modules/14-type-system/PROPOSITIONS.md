@@ -28,6 +28,7 @@ this module (see "Verified in this module").
 - [The master matrix](#the-master-matrix)
 - [Where each ceiling is](#where-each-ceiling-is)
 - [Verified in this module](#verified-in-this-module)
+- [Further reading, by problem](#further-reading-by-problem)
 - [References](#references)
 
 ## I. Propositional logic — the simply-typed core
@@ -364,6 +365,142 @@ The rest of the matrix is a survey; where a cell says `~`, the entry above names
 the exact workaround (a functor, a newtype + smart constructor, a phantom type, a
 library), so nothing is hand-waved.
 
+## Further reading, by problem
+
+Curated, readable sources for each problem this document names — a mix of
+canonical papers, language docs, and accessible blog posts and lecture notes, so
+a human can follow any thread. Every link was checked live against the repo's
+link policy.
+
+### The foundations: propositions as types, System F, the lambda cube
+
+- Wadler, "Propositions as Types" (the readable CACM version — the single best
+  overview of Curry–Howard): https://cacm.acm.org/research/propositions-as-types/
+- "The Curry–Howard Correspondence" in the Cornell OCaml textbook — Curry–Howard
+  for a working programmer: https://cs3110.github.io/textbook/chapters/adv/curry-howard.html
+- *Software Foundations*, "ProofObjects" — Curry–Howard hands-on in Coq:
+  https://softwarefoundations.cis.upenn.edu/lf-current/ProofObjects.html
+- Ghilezan, "Introduction to Barendregt's Lambda Cube" (OPLSS lecture notes):
+  https://www.cs.uoregon.edu/research/summerschool/summer23/_lectures/SG_OPLSS2023_2_handout.pdf
+  ; the Wikipedia summary: https://en.wikipedia.org/wiki/Lambda_cube
+- Diehl, "System Fω" (Typechecker Zoo) — the higher-kinded corner, with code:
+  https://sdiehl.github.io/typechecker-zoo/system-f-omega/system-f-omega.html
+
+### Parametricity and free theorems (row 9)
+
+- Wadler's parametricity page (the "Theorems for Free!" paper and follow-ups):
+  https://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html
+- Milewski, "Parametricity: Money for Nothing and Theorems for Free" (the most
+  approachable introduction): https://bartoszmilewski.com/2014/09/22/parametricity-money-for-nothing-and-theorems-for-free/
+
+### Sums, `Option`, and making illegal states unrepresentable (rows 4–6)
+
+- Wlaschin, "Designing with types: Making illegal states unrepresentable" — the
+  practitioner classic (F#, applies everywhere): https://fsharpforfunandprofit.com/posts/designing-with-types-making-illegal-states-unrepresentable/
+- King, "Parse, don't validate" — the same idea, sharpened: https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/
+- Hoare's "billion-dollar mistake" (null), the reason `Option` exists — biography
+  and context: https://en.wikipedia.org/wiki/Tony_Hoare
+
+### The expression problem (row 20)
+
+- Wadler's original note that named it: https://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt
+- Bendersky, "The Expression Problem and its solutions" — worked through in code:
+  https://eli.thegreenplace.net/2016/the-expression-problem-and-its-solutions/
+  ; overview: https://en.wikipedia.org/wiki/Expression_problem
+
+### GADTs and the well-typed interpreter (row 21)
+
+- The GHC User's Guide on GADTs (the canonical reference + the `Term a`
+  interpreter): https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/gadt.html
+- Haskell Wikibooks, "GADT" — a gentle build-up: https://en.wikibooks.org/wiki/Haskell/GADT
+- OCaml GADTs in the wild — the Tezos/Michelson well-typed interpreter:
+  https://octez.tezos.com/docs/developer/gadt.html
+
+### Higher-kinded types, functors, monads (row 12)
+
+- Serokell, "Kinds and Higher-Kinded Types in Haskell": https://serokell.io/blog/kinds-and-hkts-in-haskell
+- Rișcuția, "Higher Kinded Types: Functors" (why a language without HKT cannot
+  write a generic `Functor`): https://vladris.com/blog/2019/09/06/higher-kinded-types-functors.html
+- Yallop & White, "Lightweight Higher-Kinded Polymorphism" — the OCaml
+  defunctionalized `('a, 'f) app` encoding: https://www.cl.cam.ac.uk/~jdy22/papers/lightweight-higher-kinded-polymorphism.pdf
+
+### Existential types and abstract data types (row 10)
+
+- Mitchell & Plotkin, "Abstract Types Have Existential Type" — the paper that
+  identified the connection: https://homepages.inf.ed.ac.uk/gdp/publications/Abstract_existential.pdf
+
+### Subtyping and variance (rows 15–16)
+
+- Wikipedia, "Covariance and contravariance (computer science)" — the clearest
+  survey of co/contra/invariance: https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)
+- Scala's "Variances" tour — declaration-site `+`/`-` in practice:
+  https://docs.scala-lang.org/tour/variances.html
+- Altidor et al., "Taming the Wildcards: Combining Definition- and Use-Site
+  Variance" — declaration-site vs use-site, precisely: https://yanniss.github.io/variance-pldi11.pdf
+
+### Row polymorphism and extensible records (row 18)
+
+- "Row Polymorphism without the Jargon": https://jadon.io/blog/row-polymorphism/
+- Cambridge lecture notes on rows: https://www.cl.cam.ac.uk/teaching/1415/L28/rows.pdf
+
+### Refinement types (row 25)
+
+- *Programming with Refinement Types* — the Liquid Haskell book:
+  https://ucsd-progsys.github.io/liquidhaskell-tutorial/book.pdf ; Vazou's course,
+  lecture 1: https://nikivazou.github.io/lh-course/Lecture_01_RefinementTypes.html
+- The F* tutorial (refinement types + SMT, up to full verification):
+  https://fstar-lang.org/tutorial/
+
+### Type-level naturals, const generics, units of measure (rows 23–24, 26)
+
+- Sandler, "It's Time to Get Hyped About Const Generics in Rust": https://nora.codes/post/its-time-to-get-hyped-about-const-generics-in-rust/
+  ; the const-generics RFC: https://rust-lang.github.io/rfcs/2000-const-generics.html
+- varkor, "Types for units of measure" — phantom-typed dimensions, and what a
+  native system (F#) adds: https://varkor.github.io/blog/2018/07/30/types-for-units-of-measure.html
+  ; F# Units of Measure: https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/units-of-measure
+
+### Affine, linear, ownership, regions, thread-safety (rows 27–30)
+
+- Boats, "Ownership" — Rust ownership *as affine typing*, essay form:
+  https://without.boats/blog/ownership/ ; the Rust Book on ownership:
+  https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html and
+  lifetimes: https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html
+- Wikipedia, "Substructural type system" — the logic behind linear/affine:
+  https://en.wikipedia.org/wiki/Substructural_type_system
+- Bernardy et al., "Linear Haskell" (the Morning Paper summary): https://blog.acolyer.org/2018/01/24/linear-haskell-practical-linearity-in-a-higher-order-polymorphic-language/
+- The Rust Book, "Fearless Concurrency" and the `Send`/`Sync` chapter — data-race
+  freedom by typing: https://doc.rust-lang.org/book/ch16-00-concurrency.html ,
+  https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html
+
+### Typestate and session types (rows 31–32)
+
+- Cliffle, "The Typestate Pattern in Rust": https://cliffle.com/blog/rust-typestate/
+  ; the Embedded Rust Book's typestate chapter: https://docs.rust-embedded.org/book/static-guarantees/typestate-programming.html
+- Fowler, "Session types in programming languages — a collection of
+  implementations": https://simonjf.com/2016/05/28/session-type-implementations.html
+  ; the Stanford CS242 session-types lecture: https://stanford-cs242.github.io/f18/lectures/07-2-session-types.html
+
+### Effect systems and algebraic effects (row 33)
+
+- *The Koka Book* — typed algebraic effects as the core of a language:
+  https://koka-lang.github.io/koka/doc/book.html
+- Bauer & Pretnar, "What is algebraic about algebraic effects and handlers?":
+  https://arxiv.org/pdf/1807.05923
+- OCaml 5 effect handlers (untyped effects, in the manual): https://ocaml.org/manual/5.4/effects.html
+
+### The dependent frontier: dependent types, totality, proofs (rows 36–40)
+
+- "A Brutal (Meta-)Introduction to Dependent Types in Agda" — the fastest way in
+  for a programmer: https://oxij.org/note/BrutalDepTypes/
+- Agda, "What is Agda?": https://agda.readthedocs.io/en/latest/getting-started/what-is-agda.html
+  ; *Theorem Proving in Lean 4*: https://leanprover.github.io/theorem_proving_in_lean4/
+  ; the Idris 2 tutorial: https://idris2.readthedocs.io/en/latest/tutorial/index.html
+- Turner, "Total Functional Programming" — why termination checking matters and
+  the data/codata split: https://www.jucs.org/jucs_10_7/total_functional_programming.html
+  ; overview: https://en.wikipedia.org/wiki/Total_functional_programming
+- The nLab entry on the identity type (the value-level equality the five
+  languages lack): https://ncatlab.org/nlab/show/identity+type
+
 ## References
 
 Foundational:
@@ -372,7 +509,8 @@ Foundational:
 - Wadler, "Propositions as Types" (2015): https://homepages.inf.ed.ac.uk/wadler/papers/propositions-as-types/propositions-as-types.pdf
 - Girard, *Proofs and Types* (System F / Fω): https://www.paultaylor.eu/stable/prot.pdf
 - Reynolds, "Types, Abstraction and Parametric Polymorphism" (1983); Wadler,
-  "Theorems for Free!" (1989): https://homepages.inf.ed.ac.uk/wadler/papers/free/free.pdf
+  "Theorems for Free!" (1989), via Wadler's parametricity page:
+  https://homepages.inf.ed.ac.uk/wadler/topics/parametricity.html
 - Pierce, *Types and Programming Languages* (TAPL), and Harper, *Practical
   Foundations for Programming Languages* (PFPL).
 - Wadler, "The Expression Problem" (1998): https://homepages.inf.ed.ac.uk/wadler/papers/expression/expression.txt
