@@ -31,7 +31,7 @@ Apple M4 Pro (14 cores), macOS arm64.
 | 11  | Testing                       | done    | table + property (testing/quick) + native fuzz + testing/synctest virtual time (Go 1.25, rate-limiter tested deterministically); reject-buggy shows the fuzz invariants CATCHING a planted bug; hand-rolled property loops in the other 4; Dedup exercise |
 | 12  | Capstone                      | done    | concurrent bounded cache (mutex+eviction+semaphore backpressure+ctx shutdown) in 5 langs; throughput+p50/p99/p999 bench + migration matrix (binary/LOC/cold-compile); actor trades throughput for a tight tail |
 | 13  | Unsafe                        | done    | unsafe.String/Slice zero-copy (1.6ns/0 allocs vs 11ns/80B), Offsetof layout, uintptr GC hazard; Rust/Miri, OCaml Obj.magic, Swift withUnsafeBytes, JVM FFM/ByteBuffer |
-| 14  | Type-system quirks            | done    | Go phantom type params, Rust typestate, OCaml GADT eval, Swift typestate, Kotlin variance; 4 compile-rejects; expressiveness matrix |
+| 14  | Type-system quirks            | done    | Go phantom type params, Rust typestate, OCaml GADT eval + type-equality witness, Rust const-generic length-indexing (+reject), Swift typestate, Kotlin variance; 5 compile-rejects; PROPOSITIONS.md = 40-proposition catalogue (Curry-Howard, propositional core -> quantifiers -> indexed -> substructural -> dependent frontier) with a per-proposition 5-language +/-/x matrix (every version-sensitive cell compiler-checked) |
 
 ## Build order
 

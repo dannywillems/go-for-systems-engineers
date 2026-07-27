@@ -25,11 +25,18 @@
       "dir": "reject-kotlin",
       "cmd": ["bash", "-c", "kotlinc reject.kt -include-runtime -d /tmp/rk14.jar 2>&1 | grep -i \"in 'in' position\" | head -1"],
       "allowError": true, "portable": false
+    },
+    "rust-len-reject": {
+      "dir": "reject-rust-len",
+      "cmd": ["bash", "-c", "cargo build 2>&1 | grep -iE 'size of 3, found one with a size of 2' | head -1"],
+      "allowError": true, "portable": false, "normalize": ["path"]
     }
   },
   "snippets": {
     "go-phantom":     { "file": "go/phantom.go",       "region": "phantom" },
     "rust-typestate": { "file": "rust/src/lib.rs",     "region": "typestate" },
-    "ocaml-gadt":     { "file": "ocaml/lib/ts.ml",     "region": "gadt" }
+    "rust-lenvec":    { "file": "rust/src/lib.rs",     "region": "lenvec" },
+    "ocaml-gadt":     { "file": "ocaml/lib/ts.ml",     "region": "gadt" },
+    "ocaml-eq":       { "file": "ocaml/lib/ts.ml",     "region": "eq" }
   }
 }

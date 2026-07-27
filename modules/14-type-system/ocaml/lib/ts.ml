@@ -23,3 +23,15 @@ let rec eval : type a. a expr -> a = function
   | Eq (x, y) -> eval x = eval y
 
 (* region:gadt:end *)
+
+(* region:eq:start *)
+
+(* Propositional TYPE equality as a value: a term of type [(a, b) eq] is EVIDENCE
+   that the types a and b are equal. Matching on [Refl] refines a = b in that
+   branch, so [cast] coerces an [a] to a [b] with no Obj.magic -- the identity-
+   type fragment of a dependent theory, which Go/Rust/Swift/Kotlin cannot state. *)
+type (_, _) eq = Refl : ('a, 'a) eq
+
+let cast : type a b. (a, b) eq -> a -> b = fun Refl x -> x
+
+(* region:eq:end *)

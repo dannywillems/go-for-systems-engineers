@@ -13,7 +13,9 @@ evaluator the others cannot match without heavy machinery.
 - [Rust: typestate](#rust-typestate)
 - [OCaml: GADTs](#ocaml-gadts)
 - [Swift and Kotlin](#swift-and-kotlin)
+- [Two more verified propositions](#two-more-verified-propositions)
 - [What each cannot express](#what-each-cannot-express)
+- [The full catalogue: 40 propositions](#the-full-catalogue-40-propositions)
 - [References](#references)
 
 ## Go: phantom type parameters
@@ -177,21 +179,88 @@ reject.kt:6:23: error: type parameter 'T' is declared as 'out' but occurs in 'in
 ```
 <!-- END:output kotlin-reject -->
 
+## Two more verified propositions
+
+Two type-level propositions worth isolating, because they mark exactly where the
+five languages diverge, and both are compiled and checked here.
+
+**Propositional type equality (OCaml).** A *value* of type `(a, b) eq` is
+evidence that the types `a` and `b` are equal; matching on `Refl` refines the
+equation in that branch, so a cast `a -> b` needs no `Obj.magic`. This is the
+identity-type fragment of a dependent theory — Rust, Swift, Kotlin, and Go
+cannot construct such a witness:
+
+<!-- BEGIN:snippet ocaml-eq -->
+```ocaml
+(* Propositional TYPE equality as a value: a term of type [(a, b) eq] is EVIDENCE
+   that the types a and b are equal. Matching on [Refl] refines a = b in that
+   branch, so [cast] coerces an [a] to a [b] with no Obj.magic -- the identity-
+   type fragment of a dependent theory, which Go/Rust/Swift/Kotlin cannot state. *)
+type (_, _) eq = Refl : ('a, 'a) eq
+
+let cast : type a b. (a, b) eq -> a -> b = fun Refl x -> x
+```
+<!-- END:snippet ocaml-eq -->
+
+**Type-level naturals (Rust).** Const generics put a *number* in the type, so
+`zip_add` requires both arrays to share the length `N` — a length-indexed
+vector:
+
+<!-- BEGIN:snippet rust-lenvec -->
+```rust
+// Const generics put a NATURAL NUMBER in the type. `zip_add` requires both
+// arrays to have the SAME length N, so a length mismatch is a compile error, not
+// a runtime panic -- a length-indexed vector. (See reject-rust-len for the
+// rejected mismatched call.)
+pub fn zip_add<const N: usize>(a: [i64; N], b: [i64; N]) -> [i64; N] {
+    let mut out = [0i64; N];
+    for i in 0..N {
+        out[i] = a[i] + b[i];
+    }
+    out
+}
+```
+<!-- END:snippet rust-lenvec -->
+
+Passing mismatched lengths is a compile error, not a runtime panic; the length
+is checked in the type:
+
+<!-- BEGIN:output rust-len-reject -->
+```text
+   |             -------            ^^^^^^ expected an array with a size of 3, found one with a size of 2
+```
+<!-- END:output rust-len-reject -->
+
 ## What each cannot express
 
 - **Go**: no higher-kinded types (Module 03 reject), no generic methods
   (Module 04 reject), no GADTs, no declaration-site variance. Phantom type
   parameters and structural interfaces are the ceiling.
-- **Rust**: very expressive (GATs, const generics, typestate) but no true HKT
-  without workarounds; specialization is unstable.
-- **OCaml**: GADTs, polymorphic variants, first-class modules (explicit
-  existentials), and functors (higher-kinded over modules) — the richest here
-  for type-level modelling.
-- **Swift**: associated types, `some`/`any`, conditional conformance; no HKT.
-- **Kotlin**: variance and reified generics, but JVM erasure limits runtime type
-  reflection.
+- **Rust**: very expressive (GATs, const generics, typestate, affine ownership)
+  but no true HKT without workarounds; no GADTs; specialization is unstable.
+- **OCaml**: GADTs, propositional type equality, polymorphic variants, first-class
+  modules (explicit existentials), and functors (higher-kinded over modules) —
+  the richest here for type-level modelling.
+- **Swift**: associated types, `some`/`any`, value generics, `~Copyable`, typed
+  throws, conditional conformance; no HKT, no GADTs.
+- **Kotlin**: declaration-site variance and reified generics, but JVM erasure
+  limits runtime type reflection.
 
-See [`COMPARISON.md`](COMPARISON.md) for the expressiveness matrix.
+## The full catalogue: 40 propositions
+
+The lists above are a sample. [`PROPOSITIONS.md`](PROPOSITIONS.md) is the full
+catalogue: 40 propositions type theorists care about, from the propositional
+core (products, sums, `⊥`) through the quantifiers (`∀`, `∃`, rank-N,
+higher-kinded), subtyping and variance, indexed types (GADTs, type equality,
+length-indexing, refinements), substructural types and effects (affine,
+linear, regions, `Send`, typed effects), up to the dependent frontier
+(`Π`/`Σ`, the identity type, termination) — each with its Curry–Howard reading,
+the problem class it solves, and a **✓/~/✗ verdict for all five languages** plus
+a dependently-typed reference column. Every version-sensitive cell was checked
+against the pinned compilers.
+
+See [`COMPARISON.md`](COMPARISON.md) for the per-showcase expressiveness matrix
+that pairs with the code above.
 
 ## References
 
