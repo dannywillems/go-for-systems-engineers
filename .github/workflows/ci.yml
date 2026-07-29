@@ -136,6 +136,8 @@ jobs:
         run: brew install kotlin ktlint
       - name: Check portable captured blocks are fresh
         run: bash scripts/ci/docs-fresh.sh
+      - name: Verify every reject-* demo still fails to compile as documented
+        run: bash scripts/ci/check-rejects.sh
 
   generate-fresh:
     runs-on: ubuntu-latest

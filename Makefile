@@ -228,6 +228,10 @@ docs: tools ## Regenerate all captured README blocks
 docs-check: tools ## Fail if any portable captured block is stale (docs-fresh gate)
 	@$(OPAM) $(CAPTURE) -root $(SCOPE) -check
 
+.PHONY: check-rejects
+check-rejects: ## Verify every reject-* demo still fails to compile as documented
+	@bash scripts/ci/check-rejects.sh
+
 .PHONY: check-links
 check-links: ## Check every markdown link is live (needs network; flaky, run manually)
 	@bash scripts/check-links.sh
