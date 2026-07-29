@@ -13,17 +13,14 @@
 # "this does not compile" became false.
 set -uo pipefail
 
-# All five toolchains must be reachable (this runs in the docs-fresh job).
+# All five toolchains must be reachable. The OCaml reject commands run a bare
+# `dune`, so invoke this script UNDER the opam environment -- `opam exec -- bash
+# scripts/ci/check-rejects.sh` in CI, or `make check-rejects` locally (which
+# wraps it with $(OPAM)). reject-errcheck needs golangci-lint on PATH.
 if [ -d /opt/homebrew/opt/openjdk/bin ]; then
 	export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 fi
 export GOTOOLCHAIN=auto
-# Activate the opam switch so a bare `dune` (used by the OCaml reject commands)
-# resolves, both locally (switch 5.4.0) and in CI (the default switch).
-if command -v opam >/dev/null 2>&1; then
-	eval "$(opam env --switch=5.4.0 2>/dev/null)" 2>/dev/null ||
-		eval "$(opam env 2>/dev/null)" 2>/dev/null || true
-fi
 
 cd "$(dirname "$0")/../.." || exit 1
 

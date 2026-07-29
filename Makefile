@@ -230,7 +230,7 @@ docs-check: tools ## Fail if any portable captured block is stale (docs-fresh ga
 
 .PHONY: check-rejects
 check-rejects: ## Verify every reject-* demo still fails to compile as documented
-	@bash scripts/ci/check-rejects.sh
+	@$(OPAM) bash scripts/ci/check-rejects.sh
 
 .PHONY: check-links
 check-links: ## Check every markdown link is live (needs network; flaky, run manually)
