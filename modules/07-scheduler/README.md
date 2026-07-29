@@ -23,8 +23,8 @@ thread), and a tight-loop goroutine no longer blocks progress:
 <!-- BEGIN:output go-demo -->
 ```text
 $ go run ./cmd/demo
-live goroutines with 100000 parked: 100001
-after they finish: 1
+100000 goroutines parked at once; live count is at least 100001: true
+after release and join, the live count drops back near 1 (< 100): true
 main progressed past a tight-loop goroutine (async preemption): got 42
 ```
 <!-- END:output go-demo -->

@@ -23,12 +23,18 @@ func main() {
 			<-release // park until released
 		}()
 	}
-	// Give them a moment to all park, then observe the count.
+	// Give them a moment to all park, then observe the count. We assert a lower
+	// bound rather than print the exact NumGoroutine(): the raw count also
+	// includes runtime/system goroutines (GC workers, the timer), which vary by
+	// Go version and platform. The n parked goroutines are all alive plus main,
+	// so the live count is ALWAYS at least n+1 -- a deterministic, portable fact.
 	time.Sleep(50 * time.Millisecond)
-	fmt.Printf("live goroutines with %d parked: %d\n", n, runtime.NumGoroutine())
+	fmt.Printf("%d goroutines parked at once; live count is at least %d: %v\n",
+		n, n+1, runtime.NumGoroutine() >= n+1)
 	close(release)
 	wg.Wait()
-	fmt.Printf("after they finish: %d\n", runtime.NumGoroutine())
+	fmt.Printf("after release and join, the live count drops back near 1 (< 100): %v\n",
+		runtime.NumGoroutine() < 100)
 
 	// Asynchronous preemption (Go 1.14+): a goroutine in a tight loop with no
 	// function calls used to starve the scheduler. Now the runtime preempts it,
