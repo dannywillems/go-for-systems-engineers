@@ -8,6 +8,12 @@ practical consequences are measurable: goroutines are cheap enough that
 oversubscription *helps* latency, and the one production pitfall — `GOMAXPROCS`
 versus a container CPU quota — was itself fixed in Go 1.25.
 
+> For the *theory* underneath this module — concurrency vs parallelism, 1:1/M:N,
+> stackful vs stackless (the coloring split), cooperative vs preemptive
+> scheduling, work stealing, CSP/actors/effects, memory models, structured
+> concurrency, and where all five languages sit (including the linear-logic lens
+> on Rust vs OCaml) — see [`THEORY.md`](THEORY.md).
+
 ## Contents
 
 - [Goroutines and preemption](#goroutines-and-preemption)

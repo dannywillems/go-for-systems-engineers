@@ -2,7 +2,9 @@
 
 **Environment.** Apple M4 Pro (14 cores), macOS arm64. Go 1.26.5, Rust 1.92.0,
 OCaml 5.4.0, Swift 6.2.3, Kotlin 2.4.10 (OpenJDK 26). Measured throughput in
-[`measured.txt`](measured.txt).
+[`measured.txt`](measured.txt). The theory behind these models — stackful vs
+stackless, cooperative vs preemptive, CSP/actors/effects, memory models — is in
+[`THEORY.md`](THEORY.md).
 
 ## The models
 
